@@ -12,7 +12,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!--===============================================================================================-->	
-        
+
         <!--===============================================================================================-->
         <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
         <!--===============================================================================================-->
@@ -47,14 +47,18 @@
                         </span>
                         <span>
                             <%
-                                
-                                if(request.getParameter("error") != null){
+
+                                if (request.getParameter("error") != null) {
                                     out.print(request.getParameter("error"));
-                                }else{
+                                } else {
                                     out.print("");
                                 }
                             %>
                         </span>
+                        <div class="wrap-input100 validate-input" data-validate = "Valid email is: a@b.c">
+                            <input class="input100" type="text" name="email">
+                            <span class="focus-input100" data-placeholder="Email"></span>
+                        </div>
                         <div class="wrap-input100 validate-input" data-validate="Enter password">
                             <span class="btn-show-pass">
                                 <i class="zmdi zmdi-eye"></i>

@@ -16,14 +16,15 @@ import java.util.UUID;
  */
 public class Consultas extends Conexion{
     
-    public boolean autentication (String CONTRASEÑA){
+    public boolean autentication (String USUARIO, String CONTRASEÑA){
         PreparedStatement pst = null;
         ResultSet rs = null;
         
         try{
-            String consulta = "Select * from LOGIN where CONTRASEÑA = ?";
+            String consulta = "Select * from LOGIN where USUARIO = ? and PASSWORD = ?";
             pst = getConexion().prepareStatement(consulta);
-            pst.setString(1, CONTRASEÑA);
+            pst.setString(1, USUARIO);
+            pst.setString(2, CONTRASEÑA);
             rs = pst.executeQuery();
             if (rs.absolute(1)){
                 return true;
@@ -76,7 +77,7 @@ public class Consultas extends Conexion{
    
     public static void main(String[] args){
         Consultas co = new Consultas();
-        System.out.println(co.autentication("123"));
+        System.out.println(co.autentication("anzonyg@live.com", "1234"));
         
     }
 }
