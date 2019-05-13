@@ -11,6 +11,7 @@ import java.io.PrintWriter;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,9 +19,11 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author soporte
+ * @author agonzalez
  */
-public class InicioSesiones extends HttpServlet {
+@WebServlet(name = "R_Estudiante", urlPatterns = {"/regis_est"})
+public class R_Estudiante extends HttpServlet {
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -35,52 +38,61 @@ public class InicioSesiones extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            String usuario = "anzonyg@live.com"; //request.getParameter("email");
-            String contraseña = "123";  //request.getParameter("pass");
-            Consultas coo = new Consultas();
+            int cod_login = 0;
+            String usuario = request.getParameter("email_estudiante");
+            String contraseña = request.getParameter("password_estudiante");
+            int cod_estudiante = 0;
+            ing cod_rol = 3;
+            String nombre = request.getParameter("nombre_estudiante");
+            String apellido = request.getParameter("apellido_estudiante");
+            String direccion = request.getParameter("direccion_estudiante");
+            int telefono1 = Integer.parseInt(request.getParameter("telefono1_estudiante"));
+            int telefono2 = Integer.parseInt(request.getParameter("telefono2_estudiante"));
+            String sexo = request.getParameter("sexo_estudiante");
+            String cui = request.getParameter("cui_estudiante");
+            String fecha = request.getParameter("fecha_estudiante");
+            int cod_grado = Integer.parseInt(request.getParameter("grado_estudiante"));
+            
             PreparedStatement pst = null;
             ResultSet rst = null;
-            String administrador = "1";
-            String catedratico = "2";
-            String padre = "3";
-            String estudiante = "4";
-            String numero = null;
-            String sql = "select * from login";
+            PreparedStatement pst2 = null;
+            ResultSet rst2 = null;
+            
+            int cont = 0;
+            int cont2 = 0;
+
+            Consultas coo = new Consultas();
+            String sql = "select * from estudiante";
             pst = coo.getConexion().prepareStatement(sql);
             rst = pst.executeQuery();
             while (rst.next()) {
-                if ((usuario.equals(rst.getString(3)))&&(contraseña.equals(rst.getString(4)))) {
-                    numero = rst.getString(1);
-                    break;
-                }
+                cont = cont++;
             }
+            
             Consultas co = new Consultas();
-            if (co.autentication(usuario, contraseña)) {
-                HttpSession objsesion = request.getSession();
-                if (numero.equals(administrador)) {
-                    objsesion.setAttribute("contraseña", contraseña);
-                    objsesion.setAttribute("numero", numero);
-                    response.sendRedirect(".jsp");
-                }   if (numero.equals(catedratico)){
-                    objsesion.setAttribute("contraseña", contraseña);
-                    objsesion.setAttribute("numero", numero);
-                    response.sendRedirect("Menu.jsp");
-                }if (numero.equals(padre)){
-                    objsesion.setAttribute("contraseña", contraseña);
-                    objsesion.setAttribute("numero", numero);
-                    response.sendRedirect("Menu.jsp");
-                }if (numero.equals(estudiante)){
-                    objsesion.setAttribute("contraseña", contraseña);
-                    objsesion.setAttribute("numero", numero);
-                    response.sendRedirect("Menu.jsp");
+            String sql2 = "select * from login";
+            pst2 = co.getConexion().prepareStatement(sql2);
+            rst2 = pst2.executeQuery();
+            while (rst2.next()) {
+                cont2 = cont2++;
+            }
+            
+            cod_estudiante = cont;
+            Consultas co2 = new Consultas();
+            if (co2.regis_estudiante(cod_estudiante, cod_rol, nombre, apellido, telefono1, telefono2, sexo, direccion, cui, fecha, cod_grado)) {
+                Consultas co3 = new Consultas();
+                if (co3.registrar(cod_rol, cod_login, usuario, contraseña)) {
+                    response.sendRedirect("Administrador.jsp");
+                } else {
+                    response.sendRedirect("Registro_Estudiante.jsp");
                 }
             } else {
-                response.sendRedirect("index.jsp?error=Clave Incorrecto");
+                response.sendRedirect("Registro_Estudiante.jsp");
             }
+
         } catch (Exception e) {
             response.sendRedirect("index.jsp?error=Clave Incorrecto");
         }
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

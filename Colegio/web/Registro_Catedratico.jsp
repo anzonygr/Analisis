@@ -1,7 +1,7 @@
 <%-- 
-    Document   : Administrador
-    Created on : 12-may-2019, 12:35:08
-    Author     : ASUS
+    Document   : Registro_Catedratico
+    Created on : 13/05/2019, 03:59:19 PM
+    Author     : agonzalez
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -46,6 +46,11 @@
         <!-- Contact Form JavaScript File -->
         <script src="contactform/contactform.js"></script>
 
+        <script>
+            $(document).ready(function () {
+                $('#fecha').datepicker();
+            });
+        </script>
         <!-- Template Main Javascript File -->
         <script src="js/main2.js"></script>
 
@@ -66,7 +71,6 @@
         <meta name="description" content="">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    </body>
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -88,6 +92,76 @@
                 <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Salir</button>
             </a>
         </nav>
-        <h1>Administrador</h1>
+
+        <form class="container">
+            <h1>Registro Encargado</h1>
+            <br>
+            <br>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputAddress">Nombre</label>
+                    <input type="text" nombre="nombre_encargado" class="form-control" id="inputAddress" placeholder="Alex Rodriguez">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputAddress">Apellido</label>
+                    <input type="text" name="apellido_encargado" class="form-control" id="inputAddress" placeholder="Alex Rodriguez">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Email</label>
+                    <input type="email" name="email_encargdo" class="form-control" id="inputEmail4" placeholder="Email">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">Password</label>
+                    <input type="password" name="password_encargdo" class="form-control" id="inputPassword4" placeholder="Password">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="inputAddress2">Direccion</label>
+                <input type="text" name="direccion_encargdo" class="form-control" id="inputAddress2" placeholder="Apartmento, o piso">
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputCity">Telefono 1</label>
+                    <input type="text" name="telefono1_encargdo" class="form-control" id="inputCity" placeholder="12345678">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputCity">Telefono 2</label>
+                    <input type="text" name="telefono2_encargdo" class="form-control" id="inputCity" placeholder="12345678">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputCity">DPI</label>
+                    <input type="text" name="dpi_encargdo" class="form-control" id="inputCity" placeholder="12345678">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputState">Sexo</label>
+                    <select name="sexo_estudiante" id="inputState" class="form-control">
+                        <option selected>Opciones...</option>
+                        <option value="MASCULINO">Masculino</option>
+                        <option value="FEMENINO">Femenino</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputCity">Fecha de Nacimiento</label>
+                    <input type="text" name="fecha_estudiante" class="form-control" id="inputCity" placeholder="01-05-2019">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputCity">Titulo</label>
+                    <input type="text" name="fecha_estudiante" class="form-control" id="inputCity" placeholder="01-05-2019">
+                </div>
+
+            </div>
+            <br>
+            <br>
+            <br>
+
+            <br>
+            <div align="center">
+                <button type="submit" class="btn btn-primary">Registrar</button>
+            </div>
+            <br>
+        </form>
     </body>
 </html>

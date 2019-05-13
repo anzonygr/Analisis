@@ -1,6 +1,6 @@
 <%-- 
-    Document   : Administrador
-    Created on : 12-may-2019, 12:35:08
+    Document   : Registro_Usuario
+    Created on : 12-may-2019, 13:25:09
     Author     : ASUS
 --%>
 
@@ -46,6 +46,11 @@
         <!-- Contact Form JavaScript File -->
         <script src="contactform/contactform.js"></script>
 
+        <script>
+            $(document).ready(function () {
+                $('#fecha').datepicker();
+            });
+        </script>
         <!-- Template Main Javascript File -->
         <script src="js/main2.js"></script>
 
@@ -66,7 +71,6 @@
         <meta name="description" content="">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    </body>
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -88,6 +92,87 @@
                 <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Salir</button>
             </a>
         </nav>
-        <h1>Administrador</h1>
+
+        <form class="container">
+            <h1>Registro Estudiante</h1>
+            <br>
+            <br>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputAddress">Nombre</label>
+                    <input type="text" nombre="nombre_estudiante" class="form-control" id="inputAddress" placeholder="Alex Rodriguez">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputAddress">Apellido</label>
+                    <input type="text" name="apellido_estudiante" class="form-control" id="inputAddress" placeholder="Alex Rodriguez">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Email</label>
+                    <input type="email" name="email_estudiante" class="form-control" id="inputEmail4" placeholder="Email">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">Password</label>
+                    <input type="password" name="password_estudiante" class="form-control" id="inputPassword4" placeholder="Password">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="inputAddress2">Direccion</label>
+                <input type="text" name="direccion_estudiante" class="form-control" id="inputAddress2" placeholder="Apartmento, o piso">
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputCity">Telefono 1</label>
+                    <input type="text" name="telefono1_estudiante" class="form-control" id="inputCity" placeholder="12345678">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputCity">Telefono 2</label>
+                    <input type="text" name="telefono2_estudiante" class="form-control" id="inputCity" placeholder="12345678">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputState">Sexo</label>
+                    <select name="sexo_estudiante" id="inputState" class="form-control">
+                        <option selected>Opciones...</option>
+                        <option value="MASCULINO">Masculino</option>
+                        <option value="FEMENINO">Femenino</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputCity">CUI</label>
+                    <input type="text" name="cui_estudiante" class="form-control" id="inputCity" placeholder="12345678">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputCity">Fecha de Nacimiento</label>
+                    <input type="text" name="fecha_estudiante" class="form-control" id="inputCity" placeholder="01-05-2019">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputState">Grado</label>
+                    <select name="grado_estudiante" id="inputState" class="form-control">
+                        <option selected>Opciones...</option>
+                        <option value="4">1ro. Basico</option>
+                        <option value="2do. Basico">2do. Basico</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputState">Encargado</label>
+                    <select name="grado_estudiante" id="inputState" class="form-control">
+                        <option selected>Opciones...</option>
+                        <option value="4">1ro. Basico</option>
+                        <option value="2do. Basico">2do. Basico</option>
+                    </select>
+                </div>
+            </div>
+            <br>
+            <br>
+            <br>
+            
+            <br>
+            <div align="center">
+                <button type="submit" class="btn btn-primary">Registrar</button>
+            </div>
+            <br>
+        </form>
     </body>
 </html>

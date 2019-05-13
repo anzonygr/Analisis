@@ -1,7 +1,7 @@
 <%-- 
-    Document   : Registro_Usuario
-    Created on : 12-may-2019, 13:25:09
-    Author     : ASUS
+    Document   : Registro_Encargado
+    Created on : 13/05/2019, 03:59:05 PM
+    Author     : agonzalez
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -46,6 +46,11 @@
         <!-- Contact Form JavaScript File -->
         <script src="contactform/contactform.js"></script>
 
+        <script>
+            $(document).ready(function () {
+                $('#fecha').datepicker();
+            });
+        </script>
         <!-- Template Main Javascript File -->
         <script src="js/main2.js"></script>
 
@@ -76,7 +81,9 @@
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
                     <a class="navbar-brand text-white bg-dark">Administrador</a>
-                    <a class="nav-item nav-link" href="Registro_Usuario.jsp">Registro de Usuario</a>
+                    <a class="nav-item nav-link" href="Registro_Estudiante.jsp">Registro de Estudiante</a>
+                    <a class="nav-item nav-link" href="Registro_Encargado.jsp">Registro de Encargado</a>
+                    <a class="nav-item nav-link" href="Registro_Catedratico.jsp">Registro de Catedratico</a>
                     <a class="nav-item nav-link" href="Asignacion_Curso.jsp">Asignacion de Cursos</a>
                     <a class="nav-item nav-link" href="Usuario.jsp">Usuarios</a>
                 </div>
@@ -87,115 +94,57 @@
         </nav>
 
         <form class="container">
-            <h1>Registro Usuario</h1>
+            <h1>Registro Encargado</h1>
             <br>
             <br>
-
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputAddress">Nombre</label>
+                    <input type="text" nombre="nombre_encargado" class="form-control" id="inputAddress" placeholder="Alex Rodriguez">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputAddress">Apellido</label>
+                    <input type="text" name="apellido_encargado" class="form-control" id="inputAddress" placeholder="Alex Rodriguez">
+                </div>
+            </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="inputEmail4">Email</label>
-                    <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+                    <input type="email" name="email_encargdo" class="form-control" id="inputEmail4" placeholder="Email">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="inputPassword4">Password</label>
-                    <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
+                    <input type="password" name="password_encargdo" class="form-control" id="inputPassword4" placeholder="Password">
                 </div>
             </div>
-            <div class="form-group">
-                <label for="inputAddress">Nombre</label>
-                <input type="text" class="form-control" id="inputAddress" placeholder="Alex Rodriguez">
-            </div>
+
             <div class="form-group">
                 <label for="inputAddress2">Direccion</label>
-                <input type="text" class="form-control" id="inputAddress2" placeholder="Apartmento, o piso">
+                <input type="text" name="direccion_encargdo" class="form-control" id="inputAddress2" placeholder="Apartmento, o piso">
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label for="inputCity">Telefono</label>
-                    <input type="text" class="form-control" id="inputCity" placeholder="12345678">
+                    <label for="inputCity">Telefono 1</label>
+                    <input type="text" name="telefono1_encargdo" class="form-control" id="inputCity" placeholder="12345678">
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="inputCity">NIT</label>
-                    <input type="text" class="form-control" id="inputCity" placeholder="592315-9">
+                    <label for="inputCity">Telefono 2</label>
+                    <input type="text" name="telefono2_encargdo" class="form-control" id="inputCity" placeholder="12345678">
                 </div>
-
-
-
                 <div class="form-group col-md-6">
-                    <label for="inputState">Perfil</label>
-                    <select id="inputState" class="form-control">
-                        <option selected>Opciones...</option>
-                        <option>Adminstrador</option>
-                        <option>Catedratico</option>
-                        <option>Padre</option>
-                        <option>Estudiante</option>
-                    </select>
+                    <label for="inputCity">DPI</label>
+                    <input type="text" name="dpi_encargdo" class="form-control" id="inputCity" placeholder="12345678">
                 </div>
+                <div class="form-group col-md-6">
+                    <label for="inputCity">Parentesco</label>
+                    <input type="text" name="parentesco" class="form-control" id="inputCity">
+                </div>
+
             </div>
             <br>
-            <table class="table">
-                <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Grado</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td><input type="text" class="form-control" id="inputAddress" placeholder="Alex Rodriguez"></td>
-                        <td>
-                            <select id="inputState" class="form-control">
-                                <option selected>Opciones...</option>
-                                <option>Adminstrador</option>
-                                <option>Catedratico</option>
-                                <option>Padre</option>
-                                <option>Estudiante</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td><input type="text" class="form-control" id="inputAddress" placeholder="Alex Rodriguez"></td>
-                        <td>
-                            <select id="inputState" class="form-control">
-                                <option selected>Opciones...</option>
-                                <option>Adminstrador</option>
-                                <option>Catedratico</option>
-                                <option>Padre</option>
-                                <option>Estudiante</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td><input type="text" class="form-control" id="inputAddress" placeholder="Alex Rodriguez"></td>
-                        <td>
-                            <select id="inputState" class="form-control">
-                                <option selected>Opciones...</option>
-                                <option>Adminstrador</option>
-                                <option>Catedratico</option>
-                                <option>Padre</option>
-                                <option>Estudiante</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">4</th>
-                        <td><input type="text" class="form-control" id="inputAddress" placeholder="Alex Rodriguez"></td>
-                        <td>
-                            <select id="inputState" class="form-control">
-                                <option selected>Opciones...</option>
-                                <option>Adminstrador</option>
-                                <option>Catedratico</option>
-                                <option>Padre</option>
-                                <option>Estudiante</option>
-                            </select>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <br>
+            <br>
+
             <br>
             <div align="center">
                 <button type="submit" class="btn btn-primary">Registrar</button>
