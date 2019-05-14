@@ -53,7 +53,8 @@
         </script>
         <!-- Template Main Javascript File -->
         <script src="js/main2.js"></script>
-
+        
+                
         <script src="js/jquery/jquery-2.2.4.min.js"></script>
         <!-- Popper js -->
         <script src="js/bootstrap/popper.min.js"></script>
@@ -157,11 +158,7 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label for="inputState">Encargado</label>
-                    <select name="encargado_estudiante" id="inputState" class="form-control">
-                        <option selected>Opciones...</option>
-                        <option value="4">1ro. Basico</option>
-                        <option value="2do. Basico">2do. Basico</option>
-                    </select>
+                    <input name="encargado_estudiante" class="form-control" id="tags">
                 </div>
             </div>
             <br>
