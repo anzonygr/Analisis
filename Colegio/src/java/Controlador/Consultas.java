@@ -203,6 +203,47 @@ public class Consultas extends Conexion {
         return false;
     }
 
+    public boolean regis_asignacion(int cod_asignacion, int cod_grado, int cod_curso, int cod_seccion, int cod_catedratico, int cod_estudiante, String horario, int zona, int parcial_1, int parcial_2, int examen_final, String estado) {
+        PreparedStatement pst = null;
+        try {
+            String consulta = "INSERT INTO asignacion (COD_ASIGNACION, COD_GRADO, COD_CURSO, COD_SECCION, COD_CATEDRATICO, COD_ESTUDIANTE, HORARIO, ZONA, PARCIAL_1, PARCIAL_2, EXAMEN_FINAL, ESTADO) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+            pst = getConexion().prepareStatement(consulta);
+            pst.setInt(1, cod_asignacion);
+            pst.setInt(2, cod_grado);
+            pst.setInt(3, cod_curso);
+            pst.setInt(4, cod_seccion);
+            pst.setInt(5, cod_catedratico);
+            pst.setInt(6, cod_estudiante);
+            pst.setString(7, horario);
+            pst.setInt(8, zona);
+            pst.setInt(9, parcial_1);
+            pst.setInt(10, parcial_2);
+            pst.setInt(11, examen_final);
+            pst.setString(12, estado);
+
+            if (pst.executeUpdate() == 1) {
+                return true;
+            }
+        } catch (Exception ex) {
+
+        } finally {
+            try {
+                if (getConexion() != null) {
+                    getConexion().close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                System.err.println("Error" + e);
+
+            }
+
+        }
+
+        return false;
+    }
+
     public String generar_password() {
         String contraseña = UUID.randomUUID().toString().toUpperCase().substring(0, 8);
         return contraseña;
@@ -225,7 +266,7 @@ public class Consultas extends Conexion {
         return 0;
 
     }
-    
+
     public int estudiante() {
         try {
             PreparedStatement pst = null;
@@ -243,7 +284,7 @@ public class Consultas extends Conexion {
         return 0;
 
     }
-    
+
     public int encargado() {
         try {
             PreparedStatement pst = null;
@@ -261,7 +302,7 @@ public class Consultas extends Conexion {
         return 0;
 
     }
-    
+
     public int catedratico() {
         try {
             PreparedStatement pst = null;
@@ -279,7 +320,25 @@ public class Consultas extends Conexion {
         return 0;
 
     }
-    
+
+    public int asignacion() {
+        try {
+            PreparedStatement pst = null;
+            ResultSet rs = null;
+            int cont = 1;
+            String consulta = "Select * from asignacion";
+            pst = getConexion().prepareStatement(consulta);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                cont++;
+            }
+            return cont;
+        } catch (Exception e) {
+        }
+        return 0;
+
+    }
+
     public ResultSet nombre_encargado() {
         try {
             PreparedStatement pst = null;
@@ -287,31 +346,197 @@ public class Consultas extends Conexion {
             String consulta = "Select * from encargado";
             pst = getConexion().prepareStatement(consulta);
             rs = pst.executeQuery();
-            
+
             return rs;
         } catch (Exception e) {
         }
         return null;
-        
+
     }
 
-    
-//    public static void main(String[] args){
-//        Consultas co = new Consultas();
-//        System.out.println(co.regis_estudiante(1, 3, "ANZONY RAFAEL", "GONZALEZ RIOS", 56695380, 30226300, "MASCULINO", "2da. calle B", "2985611460101", "08/04/2019", 4));        
-//    }
-    public static void main(String[] args) {
-        Consultas co = new Consultas();
+    public ResultSet nombre_estudiante() {
         try {
-            ResultSet rst = co.nombre_encargado();
-            while (rst.next()) {
-                String nombre_encargado = rst.getString(3) + " " + rst.getString(4);
-                System.out.println(nombre_encargado);
-                break;
-            }
-        } catch (SQLException ex) {
-            
+            PreparedStatement pst = null;
+            ResultSet rs = null;
+            String consulta = "Select * from estudiante";
+            pst = getConexion().prepareStatement(consulta);
+            rs = pst.executeQuery();
+
+            return rs;
+        } catch (Exception e) {
         }
+        return null;
+
     }
+
+    public ResultSet nombre_catedratico() {
+        try {
+            PreparedStatement pst = null;
+            ResultSet rs = null;
+            String consulta = "Select * from catedratico";
+            pst = getConexion().prepareStatement(consulta);
+            rs = pst.executeQuery();
+
+            return rs;
+        } catch (Exception e) {
+        }
+        return null;
+
+    }
+
+    public ResultSet nombre_rol() {
+        try {
+            PreparedStatement pst = null;
+            ResultSet rs = null;
+            String consulta = "Select * from rol";
+            pst = getConexion().prepareStatement(consulta);
+            rs = pst.executeQuery();
+
+            return rs;
+        } catch (Exception e) {
+        }
+        return null;
+
+    }
+
+    public ResultSet nombre_grado() {
+        try {
+            PreparedStatement pst = null;
+            ResultSet rs = null;
+            String consulta = "Select * from grado";
+            pst = getConexion().prepareStatement(consulta);
+            rs = pst.executeQuery();
+
+            return rs;
+        } catch (Exception e) {
+        }
+        return null;
+
+    }
+
+    public ResultSet nombre_seccion() {
+        try {
+            PreparedStatement pst = null;
+            ResultSet rs = null;
+            String consulta = "Select * from seccion";
+            pst = getConexion().prepareStatement(consulta);
+            rs = pst.executeQuery();
+
+            return rs;
+        } catch (Exception e) {
+        }
+        return null;
+
+    }
+
+    public ResultSet nombre_encargado_completo() {
+        try {
+            PreparedStatement pst = null;
+            ResultSet rs = null;
+            String consulta = "select a.COD_ENCARGADO, b.DESCRIPCION, concat(a.NOMBRE, ' ', a.APELLIDO), a.TELEFONO_1, a.DIRECCION, a.DPI, a.Correo FROM encargado a INNER JOIN rol b ON (b.COD_ROL = a.COD_ROL) WHERE 1";
+            pst = getConexion().prepareStatement(consulta);
+            rs = pst.executeQuery();
+
+            return rs;
+        } catch (Exception e) {
+        }
+        return null;
+
+    }
+
+    public ResultSet nombre_estudiante_completo() {
+        try {
+            PreparedStatement pst = null;
+            ResultSet rs = null;
+            String consulta = "select a.COD_ESTUDIANTE, b.DESCRIPCION, concat(a.NOMBRE, ' ', a.APELLIDO), a.TELEFONO_1, a.DIRECCION, a.CUI  FROM estudiante a INNER JOIN rol b ON (b.COD_ROL = a.COD_ROL) WHERE 1";
+            pst = getConexion().prepareStatement(consulta);
+            rs = pst.executeQuery();
+
+            return rs;
+        } catch (Exception e) {
+        }
+        return null;
+
+    }
+
+    public ResultSet nombre_catedratico_completo() {
+        try {
+            PreparedStatement pst = null;
+            ResultSet rs = null;
+            String consulta = "select a.COD_CATEDRATICO, b.DESCRIPCION, concat(a.NOMBRE, ' ', a.APELLIDO), a.TELEFONO_1, a.DIRECCION, a.DPI, a.CORREO FROM catedratico a INNER JOIN rol b ON (b.COD_ROL = a.COD_ROL) WHERE 1";
+            pst = getConexion().prepareStatement(consulta);
+            rs = pst.executeQuery();
+
+            return rs;
+        } catch (Exception e) {
+        }
+        return null;
+
+    }
+
+    public ResultSet nombre_grado_seccion() {
+        try {
+            PreparedStatement pst = null;
+            ResultSet rs = null;
+            String consulta = "select a.COD_SECCION, a.DESCRIPCION, b.DESCRIPCION FROM seccion a INNER JOIN grado b ON (b.COD_GRADO = a.COD_GRADO) WHERE 1";
+            pst = getConexion().prepareStatement(consulta);
+            rs = pst.executeQuery();
+
+            return rs;
+        } catch (Exception e) {
+        }
+        return null;
+
+    }
+
+    public ResultSet cod_grado_seccion(int cod_seccion) {
+        try {
+            PreparedStatement pst = null;
+            ResultSet rs = null;
+            String consulta = "select a.COD_GRADO, a.COD_SECCION FROM seccion a  WHERE COD_SECCION = ?";
+            pst = getConexion().prepareStatement(consulta);
+            pst.setInt(1, cod_seccion);
+            rs = pst.executeQuery();
+
+            return rs;
+        } catch (Exception e) {
+        }
+        return null;
+
+    }
+    
+    public ResultSet nombre_grado_curso(int cod_grado) {
+        try {
+            PreparedStatement pst = null;
+            ResultSet rs = null;
+            String consulta = "select a.COD_CURSO, a.DESCRIPCION FROM curso a  WHERE COD_GRADO = ?";
+            pst = getConexion().prepareStatement(consulta);
+            pst.setInt(1, cod_grado);
+            rs = pst.executeQuery();
+
+            return rs;
+        } catch (Exception e) {
+        }
+        return null;
+
+    }
+
+    public static void main(String[] args){
+        Consultas co = new Consultas();
+        System.out.println(co.regis_asignacion(4, 4, 1, 2, 1, 15, "12:30", 0, 0, 0, 0, "asignado"));        
+    }
+   // public static void main(String[] args) {
+     //   Consultas co = new Consultas();
+     //   try {
+     //       ResultSet rst = co.nombre_grado_curso(4);
+     //      while (rst.next()) {
+     //           String nombre_encargado = rst.getString(1) + " " + rst.getString(2);
+      //          System.out.println(nombre_encargado);
+
+      //      }
+     //   } catch (SQLException ex) {
+
+     //   }
+  //  }
 
 }

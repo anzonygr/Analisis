@@ -4,6 +4,9 @@
     Author     : ASUS
 --%>
 
+
+<%@page import="Controlador.Consultas"%>
+<%@page import="java.sql.ResultSet"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -46,8 +49,14 @@
         <!-- Contact Form JavaScript File -->
         <script src="contactform/contactform.js"></script>
 
+        <script>
+            $(document).ready(function () {
+                $('#fecha').datepicker();
+            });
+        </script>
         <!-- Template Main Javascript File -->
         <script src="js/main2.js"></script>
+
 
         <script src="js/jquery/jquery-2.2.4.min.js"></script>
         <!-- Popper js -->
@@ -68,7 +77,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     </head>
     <body>
-         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -76,7 +85,9 @@
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
                     <a class="navbar-brand text-white bg-dark">Administrador</a>
-                    <a class="nav-item nav-link" href="Registro_Usuario.jsp">Registro de Usuario</a>
+                    <a class="nav-item nav-link" href="Registro_Estudiante.jsp">Registro de Estudiante</a>
+                    <a class="nav-item nav-link" href="Registro_Encargado.jsp">Registro de Encargado</a>
+                    <a class="nav-item nav-link" href="Registro_Catedratico.jsp">Registro de Catedratico</a>
                     <a class="nav-item nav-link" href="Asignacion_Curso.jsp">Asignacion de Cursos</a>
                     <a class="nav-item nav-link" href="Usuario.jsp">Usuarios</a>
                 </div>
@@ -85,6 +96,104 @@
                 <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Salir</button>
             </a>
         </nav>
-        <h1>Usuario</h1>
+
+        <form  method="post">
+
+            <div class="content-wrapper col-12">
+                <div class="container-fluid ">
+                    <br/>
+                    <br/>
+                    <h1 align="center">Listado de Usuarios</h1>
+                    <table class="col table table-striped table-bordered table-responsive">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">CODIGO</th> 
+                                <th scope="col">ROL</th>    
+                                <th scope="col">NOMBRE</th>  
+                                <th scope="col">TELEFONO</th>  
+                                <th scope="col">DIRECCION</th>  
+                                <th scope="col">CUI/DPI</th>   
+                                <th scope="col">Correo</th>    
+                                <th scope="col">Proceder</th>   
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <%
+
+                                ResultSet rst = null;
+                                ResultSet rst2 = null;
+                                ResultSet rst3 = null;
+
+                                try {
+                                    Consultas co = new Consultas();
+
+                                    rst = co.nombre_encargado_completo();
+                                    rst2 = co.nombre_catedratico_completo();
+                                    rst3 = co.nombre_estudiante_completo();
+
+                                    String codigo = null;
+                                    String rol = null;
+                                    String nombre = null;
+                                    String telefono = null;
+                                    String direccion = null;
+                                    String cui = null;
+                                    String correo = null;
+                                    int i = 1;
+                                    while (rst.next()) {
+
+                                        out.print("<tr><td>" + i + "</td>");
+                                        out.print("<td>" + rst.getString(1) + "</td><td>" + rst.getString(2) + "</td><td>" + rst.getString(3) + "</td><td>" + rst.getString(4) + "</td><td>" + rst.getString(5) + "</td><td>" + rst.getString(6) + "</td><td>" + rst.getString(7) + "</td><td>");
+                                        codigo = rst.getString(1);
+                            %>
+
+                        <button type="submit" name="prueba" value="<%=codigo%>" class="btn btn-primary">Registrar</button>
+
+                        <%
+                                out.println("</td></tr>");
+                                i++;
+                            }
+                            while (rst2.next()) {
+
+                                out.print("<tr><td>" + i + "</td>");
+                                out.print("<td>" + rst2.getString(1) + "</td><td>" + rst2.getString(2) + "</td><td>" + rst2.getString(3) + "</td><td>" + rst2.getString(4) + "</td><td>" + rst2.getString(5) + "</td><td>" + rst2.getString(6) + "</td><td>" + rst2.getString(7) + "</td><td>");
+                                codigo = rst2.getString(1);
+                        %>
+
+                        <button type="submit" name="prueba" value="<%=codigo%>" class="btn btn-primary">Registrar</button>
+
+                        <%
+                                out.println("</td></tr>");
+                                i++;
+                            }
+
+                            while (rst3.next()) {
+
+                                out.print("<tr><td>" + i + "</td>");
+                                out.print("<td>" + rst3.getString(1) + "</td><td>" + rst3.getString(2) + "</td><td>" + rst3.getString(3) + "</td><td>" + rst3.getString(4) + "</td><td>" + rst3.getString(5) + "</td><td>" + rst3.getString(6) + "</td><td> ver encargado </td><td>");
+                                codigo = rst3.getString(1);
+                        %>
+
+                        <button type="submit" name="prueba" value="<%=codigo%>" class="btn btn-primary">Registrar</button>
+
+                        <%
+                                out.println("</td></tr>");
+                                i++;
+                            }
+
+                        %>
+                        </tbody>
+                    </table>
+
+
+                </div>
+
+            </div>
+
+            <% } catch (Exception e) {
+                    out.print(e.toString());
+                }
+            %>
+        </form>
     </body>
 </html>

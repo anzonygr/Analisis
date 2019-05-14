@@ -151,25 +151,35 @@
                     <label for="inputCity">Fecha de Nacimiento</label>
                     <input type="text" name="fecha_estudiante" class="form-control" id="inputCity" placeholder="01-05-2019">
                 </div>
+                <%
+                    ResultSet rst = null;
+                    ResultSet rst2 = null;
+                    try {
+                        Consultas co = new Consultas();
+                %>
                 <div class="form-group col-md-6">
                     <label for="inputState">Grado</label>
-                    <select name="grado_estudiante" id="inputState" class="form-control">
-                        <option selected>Opciones...</option>
-                        <option value="4">1ro. Basico</option>
-                        <option value="2do. Basico">2do. Basico</option>
+                    <select name="seccion_estudiante" id="inputState" class="form-control">
+                        <%
+                            rst2 = co.nombre_grado_seccion();
+                            while (rst2.next()) {
+                                String nombre_grado = rst2.getString(3) + "   "+ rst2.getString(2);
+                                int cod_seccion = Integer.parseInt(rst2.getString(1));
+                        %>
+                        <option value="<%=cod_seccion%>"><%=nombre_grado%></option>
+                        <%
+                            }
+                        %>
                     </select>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="inputState">Encargado</label>
                     <select name="encargado" id="inputState" class="form-control">
                         <%
-                            ResultSet rst = null;
-                            try {
-                                Consultas co = new Consultas();
-                                rst = co.nombre_encargado();
-                                while (rst.next()) {
-                                    String nombre_encargado = rst.getString(3) + " " + rst.getString(4);
-                                    int cod_encargado = Integer.parseInt(rst.getString(1));
+                            rst = co.nombre_encargado();
+                            while (rst.next()) {
+                                String nombre_encargado = rst.getString(3) + " " + rst.getString(4);
+                                int cod_encargado = Integer.parseInt(rst.getString(1));
                         %>
                         <option value="<%=cod_encargado%>"><%=nombre_encargado%></option>
                         <%
