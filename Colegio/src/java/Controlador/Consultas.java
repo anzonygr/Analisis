@@ -106,6 +106,41 @@ public class Consultas extends Conexion{
         return false;
     }
 
+    public boolean regis_encargado(int cod_encargado, int cod_rol, String nombre, String apellido, int telefono1, int telefono2, String correo, String parentesco, String direccion, String dpi){
+        PreparedStatement pst = null;
+        try{
+            String consulta = "INSERT INTO encargado (COD_ENCARGADO, COD_ROL, NOMBRE, APELLIDO, TELEFONO_1, TELEFONO_2, CORREO, PARENTESCO, DIRECCION, DPI) VALUES(?,?,?,?,?,?,?,?,?,?)";
+            pst = getConexion().prepareStatement(consulta);
+            pst.setInt(1, cod_encargado);
+            pst.setInt(2, cod_rol);
+            pst.setString(3, nombre);
+            pst.setString(4, apellido);
+            pst.setInt(5, telefono1);
+            pst.setInt(6, telefono2);
+            pst.setString(7, correo);
+            pst.setString(8, parentesco);
+            pst.setString(9, direccion);
+            pst.setString(10, dpi);
+            if(pst.executeUpdate() == 1){
+                return  true;
+            }
+        } catch(Exception ex){
+            
+        }finally{
+            try{
+                if(getConexion() != null) getConexion().close();
+                if(pst != null) pst.close();
+            }catch(Exception e){
+                System.err.println("Error"+ e);
+                
+            } 
+            
+        }
+        
+        return false;
+    }
+
+    
     public String generar_password(){
         String contraseña = UUID.randomUUID().toString().toUpperCase().substring(0, 8);
         return contraseña;
@@ -117,7 +152,7 @@ public class Consultas extends Conexion{
 //    }
     public static void main(String[] args){
         Consultas co = new Consultas();
-        System.out.println(co.registrar(1, 2, "anzonyg@gmail.com", "4321"));        
+        System.out.println(co.regis_encargado(2, 4, "nombre", "apellido", 12345678, 12345678, "correo", "parentesco", "direccion", "dpi"));        
     }
     
 }

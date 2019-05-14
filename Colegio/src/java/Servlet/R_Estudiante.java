@@ -42,7 +42,7 @@ public class R_Estudiante extends HttpServlet {
             String usuario = request.getParameter("email_estudiante");
             String contraseña = request.getParameter("password_estudiante");
             int cod_estudiante = 0;
-            ing cod_rol = 3;
+            int cod_rol = 3;
             String nombre = request.getParameter("nombre_estudiante");
             String apellido = request.getParameter("apellido_estudiante");
             String direccion = request.getParameter("direccion_estudiante");
@@ -58,15 +58,15 @@ public class R_Estudiante extends HttpServlet {
             PreparedStatement pst2 = null;
             ResultSet rst2 = null;
             
-            int cont = 0;
-            int cont2 = 0;
+            int cont = 1;
+            int cont2 = 1;
 
             Consultas coo = new Consultas();
             String sql = "select * from estudiante";
             pst = coo.getConexion().prepareStatement(sql);
             rst = pst.executeQuery();
             while (rst.next()) {
-                cont = cont++;
+                cont++;
             }
             
             Consultas co = new Consultas();
@@ -74,20 +74,24 @@ public class R_Estudiante extends HttpServlet {
             pst2 = co.getConexion().prepareStatement(sql2);
             rst2 = pst2.executeQuery();
             while (rst2.next()) {
-                cont2 = cont2++;
+                cont2++;
             }
             
+            
             cod_estudiante = cont;
+            cod_login = cont2;
+            
             Consultas co2 = new Consultas();
+            Consultas co3 = new Consultas();
             if (co2.regis_estudiante(cod_estudiante, cod_rol, nombre, apellido, telefono1, telefono2, sexo, direccion, cui, fecha, cod_grado)) {
-                Consultas co3 = new Consultas();
+                
                 if (co3.registrar(cod_rol, cod_login, usuario, contraseña)) {
                     response.sendRedirect("Administrador.jsp");
                 } else {
                     response.sendRedirect("Registro_Estudiante.jsp");
                 }
             } else {
-                response.sendRedirect("Registro_Estudiante.jsp");
+                response.sendRedirect("Registro_Catedratico.jsp");
             }
 
         } catch (Exception e) {

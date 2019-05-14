@@ -93,14 +93,14 @@
             </a>
         </nav>
 
-        <form class="container">
+        <form action="regis_est" method="post" class="container">
             <h1>Registro Estudiante</h1>
             <br>
             <br>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="inputAddress">Nombre</label>
-                    <input type="text" nombre="nombre_estudiante" class="form-control" id="inputAddress" placeholder="Alex Rodriguez">
+                    <input type="text" name="nombre_estudiante" class="form-control" id="inputAddress" placeholder="Alex Rodriguez">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="inputAddress">Apellido</label>
@@ -157,7 +157,7 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label for="inputState">Encargado</label>
-                    <select name="grado_estudiante" id="inputState" class="form-control">
+                    <select name="encargado_estudiante" id="inputState" class="form-control">
                         <option selected>Opciones...</option>
                         <option value="4">1ro. Basico</option>
                         <option value="2do. Basico">2do. Basico</option>

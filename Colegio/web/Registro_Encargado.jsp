@@ -93,14 +93,14 @@
             </a>
         </nav>
 
-        <form class="container">
+        <form action="R_Encargado" method="post" class="container">
             <h1>Registro Encargado</h1>
             <br>
             <br>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="inputAddress">Nombre</label>
-                    <input type="text" nombre="nombre_encargado" class="form-control" id="inputAddress" placeholder="Alex Rodriguez">
+                    <input type="text" name="nombre_encargado" class="form-control" id="inputAddress" placeholder="Alex Rodriguez">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="inputAddress">Apellido</label>
@@ -110,30 +110,30 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="inputEmail4">Email</label>
-                    <input type="email" name="email_encargdo" class="form-control" id="inputEmail4" placeholder="Email">
+                    <input type="email" name="email_encargado" class="form-control" id="inputEmail4" placeholder="Email">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="inputPassword4">Password</label>
-                    <input type="password" name="password_encargdo" class="form-control" id="inputPassword4" placeholder="Password">
+                    <input type="password" name="password_encargado" class="form-control" id="inputPassword4" placeholder="Password">
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="inputAddress2">Direccion</label>
-                <input type="text" name="direccion_encargdo" class="form-control" id="inputAddress2" placeholder="Apartmento, o piso">
+                <input type="text" name="direccion_encargado" class="form-control" id="inputAddress2" placeholder="Apartmento, o piso">
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="inputCity">Telefono 1</label>
-                    <input type="text" name="telefono1_encargdo" class="form-control" id="inputCity" placeholder="12345678">
+                    <input type="text" name="telefono1_encargado" class="form-control" id="inputCity" placeholder="12345678">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="inputCity">Telefono 2</label>
-                    <input type="text" name="telefono2_encargdo" class="form-control" id="inputCity" placeholder="12345678">
+                    <input type="text" name="telefono2_encargado" class="form-control" id="inputCity" placeholder="12345678">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="inputCity">DPI</label>
-                    <input type="text" name="dpi_encargdo" class="form-control" id="inputCity" placeholder="12345678">
+                    <input type="text" name="dpi_encargado" class="form-control" id="inputCity" placeholder="12345678">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="inputCity">Parentesco</label>
