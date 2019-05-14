@@ -52,33 +52,9 @@ public class R_Catedratico extends HttpServlet {
             String fecha = request.getParameter("fecha_catedratico");
             String titulo = request.getParameter("titulo_catedratico");
             
-            PreparedStatement pst = null;
-            ResultSet rst = null;
-            PreparedStatement pst2 = null;
-            ResultSet rst2 = null;
-            
-            int cont = 1;
-            int cont2 = 1;
-
             Consultas coo = new Consultas();
-            String sql = "select * from catedratico";
-            pst = coo.getConexion().prepareStatement(sql);
-            rst = pst.executeQuery();
-            while (rst.next()) {
-                cont++;
-            }
-            
-            Consultas co = new Consultas();
-            String sql2 = "select * from login";
-            pst2 = co.getConexion().prepareStatement(sql2);
-            rst2 = pst2.executeQuery();
-            while (rst2.next()) {
-                cont2++;
-            }
-            
-            
-            cod_catedratico = cont;
-            cod_login = cont2;
+            cod_catedratico = coo.catedratico();
+            cod_login = coo.login();
             
             Consultas co2 = new Consultas();
             Consultas co3 = new Consultas();

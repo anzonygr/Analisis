@@ -4,6 +4,9 @@
     Author     : ASUS
 --%>
 
+
+<%@page import="java.sql.ResultSet"%>
+<%@page import="Controlador.Consultas"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -53,8 +56,8 @@
         </script>
         <!-- Template Main Javascript File -->
         <script src="js/main2.js"></script>
-        
-                
+
+
         <script src="js/jquery/jquery-2.2.4.min.js"></script>
         <!-- Popper js -->
         <script src="js/bootstrap/popper.min.js"></script>
@@ -158,13 +161,30 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label for="inputState">Encargado</label>
-                    <input name="encargado_estudiante" class="form-control" id="tags">
+                    <select name="encargado" id="inputState" class="form-control">
+                        <%
+                            ResultSet rst = null;
+                            try {
+                                Consultas co = new Consultas();
+                                rst = co.nombre_encargado();
+                                while (rst.next()) {
+                                    String nombre_encargado = rst.getString(3) + " " + rst.getString(4);
+                                    int cod_encargado = Integer.parseInt(rst.getString(1));
+                        %>
+                        <option value="<%=cod_encargado%>"><%=nombre_encargado%></option>
+                        <%
+                                }
+                            } catch (Exception e) {
+
+                            }
+                        %>
+                    </select>
                 </div>
             </div>
             <br>
             <br>
             <br>
-            
+
             <br>
             <div align="center">
                 <button type="submit" class="btn btn-primary">Registrar</button>

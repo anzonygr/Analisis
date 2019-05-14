@@ -50,33 +50,11 @@ public class R_Encargado extends HttpServlet {
             String parentesco = request.getParameter("parentesco");
             String dpi = request.getParameter("dpi_encargado");
             
-            PreparedStatement pst = null;
-            ResultSet rst = null;
-            PreparedStatement pst2 = null;
-            ResultSet rst2 = null;
-            
-            int cont = 1;
-            int cont2 = 1;
 
             Consultas coo = new Consultas();
-            String sql = "select * from encargado";
-            pst = coo.getConexion().prepareStatement(sql);
-            rst = pst.executeQuery();
-            while (rst.next()) {
-                cont++;
-            }
             
-            Consultas co = new Consultas();
-            String sql2 = "select * from login";
-            pst2 = co.getConexion().prepareStatement(sql2);
-            rst2 = pst2.executeQuery();
-            while (rst2.next()) {
-                cont2++;
-            }
-            
-            
-            cod_encargado = cont;
-            cod_login = cont2;
+            cod_encargado = coo.encargado();
+            cod_login = coo.login();
             
             Consultas co2 = new Consultas();
             Consultas co3 = new Consultas();

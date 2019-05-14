@@ -52,38 +52,20 @@ public class R_Estudiante extends HttpServlet {
             String cui = request.getParameter("cui_estudiante");
             String fecha = request.getParameter("fecha_estudiante");
             int cod_grado = Integer.parseInt(request.getParameter("grado_estudiante"));
+            int cod_encargado = Integer.parseInt(request.getParameter("encargado"));
             
             PreparedStatement pst = null;
             ResultSet rst = null;
             PreparedStatement pst2 = null;
             ResultSet rst2 = null;
             
-            int cont = 1;
-            int cont2 = 1;
-
-            Consultas coo = new Consultas();
-            String sql = "select * from estudiante";
-            pst = coo.getConexion().prepareStatement(sql);
-            rst = pst.executeQuery();
-            while (rst.next()) {
-                cont++;
-            }
-            
             Consultas co = new Consultas();
-            String sql2 = "select * from login";
-            pst2 = co.getConexion().prepareStatement(sql2);
-            rst2 = pst2.executeQuery();
-            while (rst2.next()) {
-                cont2++;
-            }
-            
-            
-            cod_estudiante = cont;
-            cod_login = cont2;
+            cod_login = co.login();
+            cod_estudiante = co.estudiante();
             
             Consultas co2 = new Consultas();
             Consultas co3 = new Consultas();
-            if (co2.regis_estudiante(cod_estudiante, cod_rol, nombre, apellido, telefono1, telefono2, sexo, direccion, cui, fecha, cod_grado)) {
+            if (co2.regis_estudiante(cod_estudiante, cod_rol, nombre, apellido, telefono1, telefono2, sexo, direccion, cui, fecha, cod_grado, cod_encargado)) {
                 
                 if (co3.registrar(cod_rol, cod_login, usuario, contraseña)) {
                     response.sendRedirect("Administrador.jsp");
