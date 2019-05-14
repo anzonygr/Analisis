@@ -140,6 +140,41 @@ public class Consultas extends Conexion{
         return false;
     }
 
+    public boolean regis_catedratico(int cod_catedratico, int cod_rol, String nombre, String apellido, int telefono1, int telefono2, String correo, String direccion, String dpi, String sexo, String fecha, String titulo){
+        PreparedStatement pst = null;
+        try{
+            String consulta = "INSERT INTO catedratico (COD_CATEDRATICO, COD_ROL, NOMBRE, APELLIDO, TELEFONO_1, TELEFONO_2, CORREO, DIRECCION, DPI, SEXO, FECHA_NACIMIENTO, TITULO) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+            pst = getConexion().prepareStatement(consulta);
+            pst.setInt(1, cod_catedratico);
+            pst.setInt(2, cod_rol);
+            pst.setString(3, nombre);
+            pst.setString(4, apellido);
+            pst.setInt(5, telefono1);
+            pst.setInt(6, telefono2);
+            pst.setString(7, correo);
+            pst.setString(8, direccion);
+            pst.setString(9, dpi);
+            pst.setString(10, sexo);
+            pst.setString(11, fecha);
+            pst.setString(12, titulo);
+            if(pst.executeUpdate() == 1){
+                return  true;
+            }
+        } catch(Exception ex){
+            
+        }finally{
+            try{
+                if(getConexion() != null) getConexion().close();
+                if(pst != null) pst.close();
+            }catch(Exception e){
+                System.err.println("Error"+ e);
+                
+            } 
+            
+        }
+        
+        return false;
+    }
     
     public String generar_password(){
         String contraseña = UUID.randomUUID().toString().toUpperCase().substring(0, 8);

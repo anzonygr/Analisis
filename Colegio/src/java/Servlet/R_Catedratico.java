@@ -5,8 +5,11 @@
  */
 package Servlet;
 
+import Controlador.Consultas;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,17 +35,66 @@ public class R_Catedratico extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet R_Catedratico</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet R_Catedratico at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        PrintWriter out = response.getWriter();
+        try {
+            int cod_login = 0;
+            String usuario = request.getParameter("email_catedratico");
+            String contraseña = request.getParameter("password_catedratico");
+            int cod_catedratico = 0;
+            int cod_rol = 2;
+            String nombre = request.getParameter("nombre_catedratico");
+            String apellido = request.getParameter("apellido_catedratico");
+            String direccion = request.getParameter("direccion_catedratico");
+            int telefono1 = Integer.parseInt(request.getParameter("telefono1_catedratico"));
+            int telefono2 = Integer.parseInt(request.getParameter("telefono2_catedratico"));
+            String sexo = request.getParameter("sexo_catedratico");
+            String dpi = request.getParameter("dpi_catedratico");
+            String fecha = request.getParameter("fecha_catedratico");
+            String titulo = request.getParameter("titulo_catedratico");
+            
+            PreparedStatement pst = null;
+            ResultSet rst = null;
+            PreparedStatement pst2 = null;
+            ResultSet rst2 = null;
+            
+            int cont = 1;
+            int cont2 = 1;
+
+            Consultas coo = new Consultas();
+            String sql = "select * from catedratico";
+            pst = coo.getConexion().prepareStatement(sql);
+            rst = pst.executeQuery();
+            while (rst.next()) {
+                cont++;
+            }
+            
+            Consultas co = new Consultas();
+            String sql2 = "select * from login";
+            pst2 = co.getConexion().prepareStatement(sql2);
+            rst2 = pst2.executeQuery();
+            while (rst2.next()) {
+                cont2++;
+            }
+            
+            
+            cod_catedratico = cont;
+            cod_login = cont2;
+            
+            Consultas co2 = new Consultas();
+            Consultas co3 = new Consultas();
+            if (co2.regis_catedratico(cod_catedratico, cod_rol, nombre, apellido, telefono1, telefono2, usuario, direccion, dpi, sexo, fecha, titulo)) {
+                
+                if (co3.registrar(cod_rol, cod_login, usuario, contraseña)) {
+                    response.sendRedirect("Administrador.jsp");
+                } else {
+                    response.sendRedirect("Registro_Estudiante.jsp");
+                }
+            } else {
+                response.sendRedirect("Registro_Catedratico.jsp");
+            }
+
+        } catch (Exception e) {
+            response.sendRedirect("index.jsp");
         }
     }
 

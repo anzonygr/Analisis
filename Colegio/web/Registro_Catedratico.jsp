@@ -93,51 +93,51 @@
             </a>
         </nav>
 
-        <form class="container">
-            <h1>Registro Encargado</h1>
+        <form action="regis_cate" method="post" class="container">
+            <h1>Registro Catedratico</h1>
             <br>
             <br>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="inputAddress">Nombre</label>
-                    <input type="text" nombre="nombre_encargado" class="form-control" id="inputAddress" placeholder="Alex Rodriguez">
+                    <input type="text" name="nombre_catedratico" class="form-control" id="inputAddress" placeholder="Alex Rodriguez">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="inputAddress">Apellido</label>
-                    <input type="text" name="apellido_encargado" class="form-control" id="inputAddress" placeholder="Alex Rodriguez">
+                    <input type="text" name="apellido_catedratico" class="form-control" id="inputAddress" placeholder="Alex Rodriguez">
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="inputEmail4">Email</label>
-                    <input type="email" name="email_encargdo" class="form-control" id="inputEmail4" placeholder="Email">
+                    <input type="email" name="email_catedratico" class="form-control" id="inputEmail4" placeholder="Email">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="inputPassword4">Password</label>
-                    <input type="password" name="password_encargdo" class="form-control" id="inputPassword4" placeholder="Password">
+                    <input type="password" name="password_catedratico" class="form-control" id="inputPassword4" placeholder="Password">
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="inputAddress2">Direccion</label>
-                <input type="text" name="direccion_encargdo" class="form-control" id="inputAddress2" placeholder="Apartmento, o piso">
+                <input type="text" name="direccion_catedratico" class="form-control" id="inputAddress2" placeholder="Apartmento, o piso">
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="inputCity">Telefono 1</label>
-                    <input type="text" name="telefono1_encargdo" class="form-control" id="inputCity" placeholder="12345678">
+                    <input type="text" name="telefono1_catedratico" class="form-control" id="inputCity" placeholder="12345678">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="inputCity">Telefono 2</label>
-                    <input type="text" name="telefono2_encargdo" class="form-control" id="inputCity" placeholder="12345678">
+                    <input type="text" name="telefono2_catedratico" class="form-control" id="inputCity" placeholder="12345678">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="inputCity">DPI</label>
-                    <input type="text" name="dpi_encargdo" class="form-control" id="inputCity" placeholder="12345678">
+                    <input type="text" name="dpi_catedratico" class="form-control" id="inputCity" placeholder="12345678">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="inputState">Sexo</label>
-                    <select name="sexo_estudiante" id="inputState" class="form-control">
+                    <select name="sexo_catedratico" id="inputState" class="form-control">
                         <option selected>Opciones...</option>
                         <option value="MASCULINO">Masculino</option>
                         <option value="FEMENINO">Femenino</option>
@@ -145,11 +145,11 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label for="inputCity">Fecha de Nacimiento</label>
-                    <input type="text" name="fecha_estudiante" class="form-control" id="inputCity" placeholder="01-05-2019">
+                    <input type="text" name="fecha_catedratico" class="form-control" id="inputCity" placeholder="01-05-2019">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="inputCity">Titulo</label>
-                    <input type="text" name="fecha_estudiante" class="form-control" id="inputCity" placeholder="01-05-2019">
+                    <input type="text" name="titulo_catedratico" class="form-control" id="inputCity" placeholder="01-05-2019">
                 </div>
 
             </div>
