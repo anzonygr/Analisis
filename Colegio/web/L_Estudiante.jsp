@@ -1,6 +1,6 @@
 <%-- 
-    Document   : Asignacion_Curso
-    Created on : 12-may-2019, 13:25:39
+    Document   : L_Estudiante
+    Created on : 14-may-2019, 23:58:34
     Author     : ASUS
 --%>
 
@@ -10,16 +10,16 @@
 <!DOCTYPE html>
 <%
     HttpSession objsession = request.getSession(false);
-    String usuario = (String)objsession.getAttribute("usuario");
-    String numero = (String)objsession.getAttribute("numero");
+    String usuario = (String) objsession.getAttribute("usuario");
+    String numero = (String) objsession.getAttribute("numero");
     if (usuario == null) {
-                response.sendRedirect("index.jsp?error=No haz iniciado sesion");
-            }
+        response.sendRedirect("index.jsp?error=No haz iniciado sesion");
+    }
 %>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Administrador</title>
+        <title>Catedratico</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
@@ -84,82 +84,83 @@
 
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="navbar-brand text-white bg-dark">Administrador</a>
-                    <a class="nav-item nav-link" href="Registro_Estudiante.jsp">Registro de Estudiante</a>
-                    <a class="nav-item nav-link" href="Registro_Encargado.jsp">Registro de Encargado</a>
-                    <a class="nav-item nav-link" href="Registro_Catedratico.jsp">Registro de Catedratico</a>
-                    <a class="nav-item nav-link" href="Asignacion_Curso.jsp">Asignacion de Cursos</a>
-                    <a class="nav-item nav-link" href="Usuario.jsp">Usuarios</a>
+                    <a class="navbar-brand text-white bg-primary" href="Catedratico.jsp">CATEDRATICO</a>
+                    <a class="nav-item nav-link" href="Nueva_Actividad.jsp">Nueva Tarea</a>
                 </div>
             </div>
             <a href="Cerrar.jsp" class="form-inline my-2 my-lg-0">
                 <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Salir</button>
             </a>
         </nav>
-
-        <form action="R_Catedratico_Curso.jsp" method="post" class="container">
-            <h1>Asignacion de Cursos</h1>
+        <form action="L_Estudiante" method="post">
 
             <div class="content-wrapper col-12">
                 <div class="container-fluid ">
                     <br/>
                     <br/>
-                    
+                    <h1 align="center">Listado de Usuarios</h1>
                     <table class="col table table-striped table-bordered table-responsive">
                         <thead class="thead-dark">
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">CODIGO</th> 
-                                <th scope="col">ROL</th>    
-                                <th scope="col">NOMBRE</th>  
+                                <th scope="col">NOMBRE</th> 
+                                <th scope="col">APELLIDO</th>    
                                 <th scope="col">TELEFONO</th>  
-                                <th scope="col">DIRECCION</th>  
-                                <th scope="col">DPI</th>   
-                                <th scope="col">CORREO</th>    
-                                <th scope="col">TITULO</th>   
-                                <th scope="col">PROCESO</th>   
+                                <th scope="col">CORREO</th>   
+                                <th scope="col">ZONA</th>
+                                <th scope="col">PARCIAL 1</th>
+                                <th scope="col">PARCIAL 2</th>
+                                <th scope="col">EXAMEN</th>
+                                <th scope="col">PROCEDER</th>   
                             </tr>
                         </thead>
                         <tbody>
                             <%
-
-                                ResultSet rst = null;
-                                ResultSet rst2 = null;
-                                ResultSet rst3 = null;
-
                                 try {
+                                    ResultSet rst = null;
+                                    ResultSet rst2 = null;
+                                    ResultSet rst3 = null;
+                                    String string = request.getParameter("prueba");
+                                    String[] parts = string.split("-");
+                                    String codigo_grado = parts[0];
+                                    String codigo_curso = parts[1];
+                                    String codigo_seccion = parts[2];
+                                    String codigo_catedratico = parts[3];
+                                    int cod_grado = Integer.parseInt(codigo_grado);
+                                    int cod_curso = Integer.parseInt(codigo_curso);
+                                    int cod_seccion = Integer.parseInt(codigo_seccion);
+                                    int cod_catedratico = Integer.parseInt(codigo_catedratico);
+
                                     Consultas co = new Consultas();
 
-                                    rst = co.nombre_catedratico_completo();
+                                    rst = co.nombre_list_asignacion(cod_grado, cod_curso, cod_seccion, cod_catedratico);
+                                    rst2 = co.nombre_catedratico_completo();
+                                    rst3 = co.nombre_estudiante_completo();
 
                                     String codigo = null;
-                                    String rol = null;
-                                    String nombre = null;
-                                    String telefono = null;
-                                    String direccion = null;
-                                    String cui = null;
-                                    String correo = null;
                                     int i = 1;
                                     while (rst.next()) {
 
                                         out.print("<tr><td>" + i + "</td>");
                                         out.print("<td>" + rst.getString(1) + "</td><td>" + rst.getString(2) + "</td><td>" + rst.getString(3) + "</td><td>" + rst.getString(4) + "</td><td>" + rst.getString(5) + "</td><td>" + rst.getString(6) + "</td><td>" + rst.getString(7) + "</td><td>" + rst.getString(8) + "</td><td>");
-                                        codigo = rst.getString(1);
+                                        codigo = numero;
+
                             %>
 
-                        <button action="asignacion" type="submit" name="prueba" value="<%=codigo%>" class="btn btn-primary">Asignar</button>
+                        <button type="submit" name="prueba" value="<%=codigo%>" class="btn btn-primary">Calificar</button>
 
                         <%
                                 out.println("</td></tr>");
                                 i++;
                             }
+
                         %>
                         </tbody>
                     </table>
@@ -173,7 +174,6 @@
                     out.print(e.toString());
                 }
             %>
-
         </form>
     </body>
 </html>

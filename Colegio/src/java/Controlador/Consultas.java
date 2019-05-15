@@ -534,7 +534,39 @@ public class Consultas extends Conexion {
         return null;
 
     }
+    
+    public ResultSet nombre_asignacion(int cod_catedratico) {
+        try {
+            PreparedStatement pst = null;
+            ResultSet rs = null;
+            String consulta = "select b.DESCRIPCION, d.DESCRIPCION, c.DESCRIPCION, a.HORARIO, b.COD_GRADO, d.COD_CURSO, c.COD_SECCION FROM asignacion a INNER JOIN grado b ON a.COD_GRADO = b.COD_GRADO INNER JOIN seccion c ON (a.COD_GRADO = c.COD_GRADO) AND (a.COD_SECCION = c.COD_SECCION) INNER JOIN curso d ON (a.COD_GRADO = d.COD_GRADO) AND (a.COD_CURSO = d.COD_CURSO) WHERE a.COD_CATEDRATICO = ?";
+            pst = getConexion().prepareStatement(consulta);
+            pst.setInt(1, cod_catedratico);
+            rs = pst.executeQuery();
+            return rs;
+        } catch (Exception e) {
+        }
+        return null;
 
+    }
+    
+    public ResultSet nombre_list_asignacion(int cod_grado, int cod_curso, int cod_seccion, int cod_catedratico) {
+        try {
+            PreparedStatement pst = null;
+            ResultSet rs = null;
+            String consulta = "select b.NOMBRE, b.APELLIDO, b.TELEFONO_1, c.CORREO, a.ZONA, a.PARCIAL_1, a.PARCIAL_2, a.EXAMEN_FINAL from asignacion a INNER JOIN estudiante b ON a.COD_ESTUDIANTE = b.COD_ESTUDIANTE INNER JOIN encargado c ON b.COD_ENCARGADO = c.COD_ENCARGADO WHERE a.COD_GRADO = ? AND a.COD_CURSO = ? AND a.COD_SECCION = ? AND a.COD_CATEDRATICO = ?";
+            pst = getConexion().prepareStatement(consulta);
+            pst.setInt(1, cod_grado);
+            pst.setInt(2, cod_curso);
+            pst.setInt(3, cod_seccion);
+            pst.setInt(4, cod_catedratico);
+            rs = pst.executeQuery();
+            return rs;
+        } catch (Exception e) {
+        }
+        return null;
+
+    }
 //    public static void main(String[] args){
 //        Consultas co = new Consultas();
 //        System.out.println(co.regis_asignacion(4, 4, 1, 2, 1, 15, "12:30", 0, 0, 0, 0, "asignado"));        

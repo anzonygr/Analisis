@@ -9,6 +9,14 @@
 <%@page import="Controlador.Consultas"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%
+    HttpSession objsession = request.getSession(false);
+    String usuario = (String)objsession.getAttribute("usuario");
+    String numero = (String)objsession.getAttribute("numero");
+    if (usuario == null) {
+                response.sendRedirect("index.jsp?error=No haz iniciado sesion");
+            }
+%>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
