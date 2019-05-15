@@ -101,9 +101,10 @@
             String codigo_curso = "";
             String codigo_grado = "";
             String codigo_seccion = "";
+            String dato ="";
 
         %>
-        <form  action="Asig_Cate" method="post">
+        <form  action="Asig_Cate" method="post" class="container">
 
             <div class="content-wrapper col-12">
                 <div class="container-fluid ">
@@ -121,9 +122,11 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <%                                ResultSet rst = null;
-
+                            <%                                
+                                
                                 try {
+                                    ResultSet rst = null;
+
                                     Consultas co = new Consultas();
 
                                     rst = co.nombre_grado_curso_seccion();
@@ -136,18 +139,13 @@
                                         codigo_grado = rst.getString(4);
                                         codigo_curso = rst.getString(5);
                                         codigo_seccion = rst.getString(6);
+                                        dato = codigo_grado+"-"+codigo_curso+"-"+codigo_seccion+"-"+codigo1;
                             %>
-                        <input class=" invisible h-auto" name="codigo_curso" value="<%=codigo_curso%>">
-                        <input class=" invisible h-auto" name="codigo_seccion" value="<%=codigo_seccion%>">
-                        <input class=" invisible h-auto" name="codigo" value="<%=codigo1%>">
-                        <button type="submit" name="codigo_grado" value="<%=codigo_grado%>" class="btn btn-primary">Asignar</button>
 
+                        <button type="submit" name="codigo_prueba" value="<%=dato%>" class="btn btn-primary">Asignar</button>
                         <%
                                 out.println("</td></tr>");
                                 i++;
-                                codigo_grado = " ";
-                                        codigo_curso = " ";
-                                        codigo_seccion =" ";
                             }
 
                         %>

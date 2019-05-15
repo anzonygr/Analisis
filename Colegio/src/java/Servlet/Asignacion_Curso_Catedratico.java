@@ -34,32 +34,34 @@ public class Asignacion_Curso_Catedratico extends HttpServlet {
             throws ServletException, IOException {
         PrintWriter out = response.getWriter();
         try {
-            int cod_catedratico = Integer.parseInt(request.getParameter("codigo"));
-            String codigo_grado = request.getParameter("codigo_grado");
-            String codigo_curso = request.getParameter("codigo_curso");
-            String codigo_seccion = request.getParameter("codigo_seccion") ;
-            
-            int cod_grado = Integer.parseInt(codigo_grado);
-            int cod_curso = Integer.parseInt(codigo_curso);
-            int cod_seccion = Integer.parseInt(codigo_seccion);
-            int cod_asignacion = 0;
-            int cod_estudiante = 1;
-            String horario = "15:30";
-            int zona = 0;
-            int parcial_1 = 0;
-            int parcial_2 = 0;
-            int examen_final = 0;
-            String estado = "asignado";
-            
-            Consultas co2 = new Consultas();
-            cod_asignacion = co2.asignacion();
-            
+        String string = request.getParameter("codigo_prueba");
+        String[] parts = string.split("-");
+        String codigo_grado = parts[0];
+        String codigo_curso = parts[1];
+        String codigo_seccion = parts[2];
+        String codigo_catedratico = parts[3];
+        
+        int cod_catedratico = Integer.parseInt(codigo_catedratico);
+        int cod_grado = Integer.parseInt(codigo_grado);
+        int cod_curso = Integer.parseInt(codigo_curso);
+        int cod_seccion = Integer.parseInt(codigo_seccion);
+        int cod_asignacion = 0;
+        int cod_estudiante = 1;
+        String horario = "15:30";
+        int zona = 0;
+        int parcial_1 = 0;
+        int parcial_2 = 0;
+        int examen_final = 0;
+        String estado = "asignado";
+
+        Consultas co2 = new Consultas();
+        cod_asignacion = co2.asignacion();
+
             Consultas co = new Consultas();
-            
             if (co.regis_asignacion(cod_asignacion, cod_grado, cod_curso, cod_seccion, cod_catedratico , cod_estudiante, horario, zona, parcial_1, parcial_2, examen_final, estado)){
                 response.sendRedirect("Administrador.jsp");
             }else {
-                out.print(cod_asignacion+ " "+ cod_grado+ " "+ cod_curso+ " "+ cod_seccion+ " "+ cod_catedratico+ " "+ cod_estudiante+ " "+ horario+ " "+ zona+ " "+ parcial_1+ " "+ parcial_2+ " "+ examen_final+ " "+ estado);
+            out.print(cod_asignacion + " " + cod_grado + " " + cod_curso + " " + cod_seccion + " " + cod_catedratico + " " + cod_estudiante + " " + horario + " " + zona + " " + parcial_1 + " " + parcial_2 + " " + examen_final + " " + estado);
             }
             
         } catch(Exception e){
