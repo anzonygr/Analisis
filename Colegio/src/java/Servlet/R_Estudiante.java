@@ -70,31 +70,34 @@ public class R_Estudiante extends HttpServlet {
             Consultas co = new Consultas();
             cod_login = co.login();
             cod_estudiante = co.estudiante();
-            
+
             rst = co.cod_grado_seccion(cod_seccion);
 
             while (rst.next()) {
                 cod_grado = Integer.parseInt(rst.getString(1));
             }
+
             rst2 = co.nombre_grado_curso(cod_grado);
+
             Consultas co2 = new Consultas();
             Consultas co3 = new Consultas();
-            Consultas co4 = new Consultas();
-            if (co2.regis_estudiante(cod_estudiante, cod_rol, nombre, apellido, telefono1, telefono2, sexo, direccion, cui, fecha, cod_grado, cod_encargado)){
-            while (rst2.next()) {
+            
+
+            if (co2.regis_estudiante(cod_estudiante, cod_rol, nombre, apellido, telefono1, telefono2, sexo, direccion, cui, fecha, cod_grado, cod_encargado)) {
                 cod_asignacion = co.asignacion();
-                cod_curso = Integer.parseInt(rst2.getString(1));
-                System.out.println(co4.regis_asignacion(cod_asignacion, cod_grado, cod_curso, cod_seccion, cod_catedratico, cod_estudiante, horario, zona, parcial_1, parcial_2, examen_final, estado));
-                
-                    out.println(cod_asignacion+" " +cod_grado+" " + cod_curso+" " + cod_seccion+" " + cod_catedratico+" " + cod_estudiante+" " + horario+" " + zona+" " + parcial_1+" " + parcial_2+" " + examen_final+" " + estado);
-                
-                
-                
-            }
-            }else {
+
+                while (rst2.next()) {
+                    cod_asignacion = co.asignacion();
+                    cod_curso = Integer.parseInt(rst2.getString(1));
+                    Consultas co4 = new Consultas();
+                    co4.regis_asignacion(cod_asignacion, cod_grado, cod_curso, cod_seccion, cod_catedratico, cod_estudiante, horario, zona, parcial_1, parcial_2, examen_final, estado);
+                }
+                if (co3.registrar(cod_rol, cod_login, usuario, contraseña)){
+                    response.sendRedirect("Administrador.jsp");
+                }
+            } else {
                 response.sendRedirect("Registro_Catedratico.jsp");
             }
-            
 
         } catch (Exception e) {
             response.sendRedirect("index.jsp?error=Clave Incorrecto");

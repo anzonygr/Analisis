@@ -521,22 +521,21 @@ public class Consultas extends Conexion {
 
     }
 
-    public static void main(String[] args){
-        Consultas co = new Consultas();
-        System.out.println(co.regis_asignacion(4, 4, 1, 2, 1, 15, "12:30", 0, 0, 0, 0, "asignado"));        
-    }
-   // public static void main(String[] args) {
-     //   Consultas co = new Consultas();
-     //   try {
-     //       ResultSet rst = co.nombre_grado_curso(4);
-     //      while (rst.next()) {
-     //           String nombre_encargado = rst.getString(1) + " " + rst.getString(2);
-      //          System.out.println(nombre_encargado);
+//    public static void main(String[] args){
+//        Consultas co = new Consultas();
+//        System.out.println(co.regis_asignacion(4, 4, 1, 2, 1, 15, "12:30", 0, 0, 0, 0, "asignado"));        
+//    }
+    public static void main(String[] args) {
+       Consultas co = new Consultas();
+       try {
+           ResultSet rst = co.nombre_grado_curso(4);
+          while (rst.next()) {
+               String nombre_encargado = rst.getString(1) + " " + rst.getString(2);
+              System.out.println(nombre_encargado);
+      }
+        } catch (SQLException ex) {
 
-      //      }
-     //   } catch (SQLException ex) {
-
-     //   }
-  //  }
+        }
+   }
 
 }

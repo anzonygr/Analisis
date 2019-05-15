@@ -45,8 +45,8 @@ public class InicioSesion extends HttpServlet {
             ResultSet rst = null;
             String administrador = "1";
             String catedratico = "2";
-            String padre = "3";
-            String estudiante = "4";
+            String padre = "4";
+            String estudiante = "3";
             String numero = null;
             String sql = "select * from login";
             pst = coo.getConexion().prepareStatement(sql);
