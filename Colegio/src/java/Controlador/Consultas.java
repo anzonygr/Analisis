@@ -243,6 +243,45 @@ public class Consultas extends Conexion {
 
         return false;
     }
+    
+    public boolean regis_actividad(int cod_actividad, int cod_asignacion, int cod_grado, int cod_curso, int cod_seccion, int cod_catedratico, String titulo, String descripcion, int nota, String fecha) {
+        PreparedStatement pst = null;
+        try {
+            String consulta = "INSERT INTO actividad (COD_ACTIVIDAD, COD_ASIGNACION, COD_GRADO, COD_CURSO, COD_SECCION, COD_CATEDRATICO, TITULO, DESCRIPCION, NOTA, FECHA_ENTREGA) VALUES(?,?,?,?,?,?,?,?,?,?)";
+            pst = getConexion().prepareStatement(consulta);
+            pst.setInt(1, cod_actividad);
+            pst.setInt(2, cod_asignacion);
+            pst.setInt(3, cod_grado);
+            pst.setInt(4, cod_curso);
+            pst.setInt(5, cod_seccion);
+            pst.setInt(6, cod_catedratico);
+            pst.setString(7, titulo);
+            pst.setString(8, descripcion);
+            pst.setInt(9, nota);
+            pst.setString(10, fecha);
+
+            if (pst.executeUpdate() == 1) {
+                return true;
+            }
+        } catch (Exception ex) {
+
+        } finally {
+            try {
+                if (getConexion() != null) {
+                    getConexion().close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                System.err.println("Error" + e);
+
+            }
+
+        }
+
+        return false;
+    }
 
     public String generar_password() {
         String contraseña = UUID.randomUUID().toString().toUpperCase().substring(0, 8);
@@ -338,6 +377,44 @@ public class Consultas extends Conexion {
         return 0;
 
     }
+    
+    public int actividiad() {
+        try {
+            PreparedStatement pst = null;
+            ResultSet rs = null;
+            int cont = 1;
+            String consulta = "Select * from actividad";
+            pst = getConexion().prepareStatement(consulta);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                cont++;
+            }
+            return cont;
+        } catch (Exception e) {
+        }
+        return 0;
+
+    }
+    
+    public ResultSet actividiad_cod_asignacion(int cod_grado, int cod_curso, int cod_seccion, int cod_catedratico) {
+        try {
+            PreparedStatement pst = null;
+            ResultSet rs = null;
+            String consulta = "Select COD_ASIGNACION from asignacion WHERE COD_GRADO = ? AND COD_CURSO = ? AND COD_SECCION = ? AND COD_CATEDRATICO = ?";
+            pst = getConexion().prepareStatement(consulta);
+            pst.setInt(1, cod_grado);
+            pst.setInt(2, cod_curso);
+            pst.setInt(3, cod_seccion);
+            pst.setInt(4, cod_catedratico);
+            rs = pst.executeQuery();
+            return rs;
+        } catch (Exception e) {
+        }
+        return null;
+
+    }
+    
+    
 
     public ResultSet nombre_encargado() {
         try {
@@ -567,21 +644,25 @@ public class Consultas extends Conexion {
         return null;
 
     }
-//    public static void main(String[] args){
-//        Consultas co = new Consultas();
-//        System.out.println(co.regis_asignacion(4, 4, 1, 2, 1, 15, "12:30", 0, 0, 0, 0, "asignado"));        
-//    }
-    public static void main(String[] args) {
-       Consultas co = new Consultas();
-       try {
-           ResultSet rst = co.nombre_grado_curso(4);
-          while (rst.next()) {
-               String nombre_encargado = rst.getString(1) + " " + rst.getString(2);
-              System.out.println(nombre_encargado);
-      }
-        } catch (SQLException ex) {
 
-        }
+
+   public static void main(String[] args){
+        Consultas co = new Consultas();
+        System.out.println(co.regis_actividad(2, 13, 4, 2, 1, 2, "prueba", "descripcion", 10, "fecha"));
    }
+
+
+//    public static void main(String[] args) {
+//       Consultas co = new Consultas();
+//       try {
+//           ResultSet rst = co.actividiad_cod_asignacion(4, 2, 1, 2);
+//          while (rst.next()) {
+//               String nombre_encargado = rst.getString(1);
+//              System.out.println(nombre_encargado);
+//      }
+//        } catch (SQLException ex) {
+//
+//        }
+ //  }
 
 }

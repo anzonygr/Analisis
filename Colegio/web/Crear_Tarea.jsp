@@ -4,6 +4,7 @@
     Author     : ASUS
 --%>
 
+<%@page import="java.sql.ResultSet"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
@@ -121,10 +122,23 @@
             </div>
             <br>
             <br>
+            <%try {
+                                    String string = request.getParameter("prueba");
+                                    String[] parts = string.split("-");
+                                    String codigo_grado = parts[0];
+                                    String codigo_curso = parts[1];
+                                    String codigo_seccion = parts[2];
+                                    String codigo_catedratico = parts[3];
+                                    String codigo = codigo_grado+"-"+codigo_curso+"-"+codigo_seccion+"-"+codigo_catedratico;
+%>
              <div align="center">
-                <button type="submit" class="btn btn-primary">CREAR</button>
+                <button value="<%=codigo%>" name="prueba" type="submit" class="btn btn-primary">CREAR</button>
             </div>
             <br>
+             <% } catch (Exception e) {
+                    out.print(e.toString());
+                }
+            %>
         </form>
     </body>
 </html>
