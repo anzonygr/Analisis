@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-05-2019 a las 22:17:09
+-- Tiempo de generación: 15-05-2019 a las 06:56:49
 -- Versión del servidor: 10.1.39-MariaDB
 -- Versión de PHP: 7.3.5
 
@@ -54,13 +54,31 @@ CREATE TABLE `asignacion` (
   `COD_SECCION` int(11) NOT NULL,
   `COD_CATEDRATICO` int(11) NOT NULL,
   `COD_ESTUDIANTE` int(11) DEFAULT NULL,
-  `HORARIO` time DEFAULT NULL,
+  `HORARIO` varchar(6) COLLATE utf8_spanish_ci DEFAULT NULL,
   `ZONA` int(11) DEFAULT NULL,
   `PARCIAL_1` int(11) DEFAULT NULL,
   `PARCIAL_2` int(11) DEFAULT NULL,
   `EXAMEN_FINAL` int(11) DEFAULT NULL,
-  `ESTADO` int(11) DEFAULT NULL
+  `ESTADO` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `asignacion`
+--
+
+INSERT INTO `asignacion` (`COD_ASIGNACION`, `COD_GRADO`, `COD_CURSO`, `COD_SECCION`, `COD_CATEDRATICO`, `COD_ESTUDIANTE`, `HORARIO`, `ZONA`, `PARCIAL_1`, `PARCIAL_2`, `EXAMEN_FINAL`, `ESTADO`) VALUES
+(1, 4, 1, 1, 1, 1, '15:30', 20, 7, 15, 40, 'asignado'),
+(2, 4, 2, 1, 1, 1, '15:30', 20, 7, 15, 40, 'asignado'),
+(3, 4, 3, 1, 1, 1, '15:30', 20, 7, 15, 40, 'asignado'),
+(4, 4, 4, 1, 1, 1, '15:30', 20, 7, 15, 40, 'asignado'),
+(5, 4, 1, 2, 1, 2, '15:30', 20, 7, 15, 40, 'asignado'),
+(6, 4, 2, 2, 1, 2, '15:30', 20, 7, 15, 40, 'asignado'),
+(7, 4, 3, 2, 1, 2, '15:30', 20, 7, 15, 40, 'asignado'),
+(8, 4, 4, 2, 1, 2, '15:30', 20, 7, 15, 40, 'asignado'),
+(9, 4, 1, 1, 1, 1, '15:30', 0, 0, 0, 0, 'asignado'),
+(10, 4, 1, 1, 1, 1, '15:30', 0, 0, 0, 0, 'asignado'),
+(11, 4, 1, 2, 1, 1, '15:30', 0, 0, 0, 0, 'asignado'),
+(12, 4, 3, 2, 1, 1, '15:30', 0, 0, 0, 0, 'asignado');
 
 -- --------------------------------------------------------
 
@@ -79,9 +97,16 @@ CREATE TABLE `catedratico` (
   `DIRECCION` varchar(250) COLLATE utf8_spanish_ci DEFAULT NULL,
   `DPI` varchar(13) COLLATE utf8_spanish_ci DEFAULT NULL,
   `SEXO` varchar(10) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `FECHA_NACIMIENTO` date DEFAULT NULL,
+  `FECHA_NACIMIENTO` varchar(10) COLLATE utf8_spanish_ci DEFAULT NULL,
   `TITULO` varchar(40) COLLATE utf8_spanish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `catedratico`
+--
+
+INSERT INTO `catedratico` (`COD_CATEDRATICO`, `COD_ROL`, `NOMBRE`, `APELLIDO`, `TELEFONO_1`, `TELEFONO_2`, `CORREO`, `DIRECCION`, `DPI`, `SEXO`, `FECHA_NACIMIENTO`, `TITULO`) VALUES
+(1, 2, 'CARLOS', 'RUIZ', 12345678, 87654321, 'cruiz@gmail.com', '16-45', '1234152630101', 'MASCULINO', '02/03/1978', 'PERITO CONTADOR');
 
 -- --------------------------------------------------------
 
@@ -92,9 +117,18 @@ CREATE TABLE `catedratico` (
 CREATE TABLE `curso` (
   `COD_GRADO` int(11) DEFAULT NULL,
   `COD_CURSO` int(11) NOT NULL,
-  `DESCRIPCION` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `HORARIO` time DEFAULT NULL
+  `DESCRIPCION` varchar(30) COLLATE utf8_spanish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `curso`
+--
+
+INSERT INTO `curso` (`COD_GRADO`, `COD_CURSO`, `DESCRIPCION`) VALUES
+(4, 1, 'MATEMATICA'),
+(4, 2, 'COMUNICACION Y LENGU'),
+(4, 3, 'CIENCIAS NATURALES'),
+(4, 4, 'CIENCIAS SOCIALES');
 
 -- --------------------------------------------------------
 
@@ -114,6 +148,13 @@ CREATE TABLE `encargado` (
   `DIRECCION` varchar(250) COLLATE utf8_spanish_ci DEFAULT NULL,
   `DPI` varchar(13) COLLATE utf8_spanish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `encargado`
+--
+
+INSERT INTO `encargado` (`COD_ENCARGADO`, `COD_ROL`, `NOMBRE`, `APELLIDO`, `TELEFONO_1`, `TELEFONO_2`, `CORREO`, `PARENTESCO`, `DIRECCION`, `DPI`) VALUES
+(1, 4, 'RAFAEL', 'GONZALEZ', 12345678, 87456123, 'rgonzalez@gmail.com', 'PADRE', '16-48', '1234152614501');
 
 -- --------------------------------------------------------
 
@@ -151,9 +192,18 @@ CREATE TABLE `estudiante` (
   `SEXO` varchar(10) COLLATE utf8_spanish_ci DEFAULT NULL,
   `DIRECCION` varchar(250) COLLATE utf8_spanish_ci DEFAULT NULL,
   `CUI` varchar(13) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `FECHA_NACIMIENTO` date DEFAULT NULL,
+  `FECHA_NACIMIENTO` varchar(10) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `COD_GRADO` int(11) DEFAULT NULL,
   `COD_ENCARGADO` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `estudiante`
+--
+
+INSERT INTO `estudiante` (`COD_ESTUDIANTE`, `COD_ROL`, `NOMBRE`, `APELLIDO`, `TELEFONO_1`, `TELEFONO_2`, `SEXO`, `DIRECCION`, `CUI`, `FECHA_NACIMIENTO`, `COD_GRADO`, `COD_ENCARGADO`) VALUES
+(1, 3, 'ANZONY', 'GONZALEZ', 12345678, 12345678, 'MASCULINO', '16-78 2 av.', '6125126350101', '06/04/1988', 4, 1),
+(2, 3, 'ABIGAIL', 'GONZALEZ', 12345678, 12345678, 'FEMENINO', '16-96 4ta. calle', '6125126350101', '02/06/1978', 4, 1);
 
 -- --------------------------------------------------------
 
@@ -165,6 +215,22 @@ CREATE TABLE `grado` (
   `COD_GRADO` int(11) NOT NULL,
   `DESCRIPCION` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `grado`
+--
+
+INSERT INTO `grado` (`COD_GRADO`, `DESCRIPCION`) VALUES
+(1, 'PREKINDER'),
+(2, 'KINDER'),
+(3, 'PREPIMARIA'),
+(4, '1RO. PRIMARIA'),
+(5, '2DO. PRIMARIA'),
+(6, '3RO. PRIMARIA'),
+(7, '4TO. PRIMARIA'),
+(8, '5TO. PRIMARIA'),
+(9, '6TO. PRIMARIA'),
+(10, '7MO. BASICO');
 
 -- --------------------------------------------------------
 
@@ -179,6 +245,16 @@ CREATE TABLE `login` (
   `PASSWORD` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+--
+-- Volcado de datos para la tabla `login`
+--
+
+INSERT INTO `login` (`COD_ROL`, `COD_LOGIN`, `USUARIO`, `PASSWORD`) VALUES
+(1, 1, 'anzonyg@live.com', '1234'),
+(3, 2, 'anzonyg@gmail.com', '123456'),
+(3, 4, 'abygonzalez@gmail.com', '123456'),
+(4, 1, 'rgonzalez@gmail.com', '123456');
+
 -- --------------------------------------------------------
 
 --
@@ -187,8 +263,18 @@ CREATE TABLE `login` (
 
 CREATE TABLE `rol` (
   `COD_ROL` int(11) NOT NULL,
-  `DESCRIPCION` varchar(10) COLLATE utf8_spanish_ci DEFAULT NULL
+  `DESCRIPCION` varchar(15) COLLATE utf8_spanish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `rol`
+--
+
+INSERT INTO `rol` (`COD_ROL`, `DESCRIPCION`) VALUES
+(1, 'ADMINISTRA'),
+(2, 'CATEDRATIC'),
+(3, 'ESTUDIANTE'),
+(4, 'ENCARGADO');
 
 -- --------------------------------------------------------
 
@@ -201,6 +287,14 @@ CREATE TABLE `seccion` (
   `COD_SECCION` int(11) NOT NULL,
   `DESCRIPCION` varchar(3) COLLATE utf8_spanish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `seccion`
+--
+
+INSERT INTO `seccion` (`COD_GRADO`, `COD_SECCION`, `DESCRIPCION`) VALUES
+(4, 1, 'A'),
+(4, 2, 'B');
 
 --
 -- Índices para tablas volcadas
@@ -258,7 +352,8 @@ ALTER TABLE `entrega_actividad`
 ALTER TABLE `estudiante`
   ADD PRIMARY KEY (`COD_ESTUDIANTE`),
   ADD KEY `COD_ROL` (`COD_ROL`),
-  ADD KEY `COD_ENCARGADO` (`COD_ENCARGADO`);
+  ADD KEY `COD_ENCARGADO` (`COD_ENCARGADO`),
+  ADD KEY `estudiante_ibfk_2` (`COD_GRADO`);
 
 --
 -- Indices de la tabla `grado`
@@ -334,7 +429,8 @@ ALTER TABLE `entrega_actividad`
 --
 ALTER TABLE `estudiante`
   ADD CONSTRAINT `estudiante_ibfk_1` FOREIGN KEY (`COD_ROL`) REFERENCES `rol` (`COD_ROL`),
-  ADD CONSTRAINT `estudiante_ibfk_2` FOREIGN KEY (`COD_ENCARGADO`) REFERENCES `encargado` (`COD_ENCARGADO`);
+  ADD CONSTRAINT `estudiante_ibfk_2` FOREIGN KEY (`COD_GRADO`) REFERENCES `grado` (`COD_GRADO`),
+  ADD CONSTRAINT `estudiante_ibfk_3` FOREIGN KEY (`COD_ENCARGADO`) REFERENCES `encargado` (`COD_ENCARGADO`);
 
 --
 -- Filtros para la tabla `login`
