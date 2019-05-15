@@ -1,9 +1,8 @@
 <%-- 
-    Document   : Usuario
-    Created on : 12-may-2019, 13:26:04
+    Document   : R_Catedratico_Curso
+    Created on : 14-may-2019, 20:03:05
     Author     : ASUS
 --%>
-
 
 <%@page import="Controlador.Consultas"%>
 <%@page import="java.sql.ResultSet"%>
@@ -57,7 +56,6 @@
         <!-- Template Main Javascript File -->
         <script src="js/main2.js"></script>
 
-
         <script src="js/jquery/jquery-2.2.4.min.js"></script>
         <!-- Popper js -->
         <script src="js/bootstrap/popper.min.js"></script>
@@ -75,6 +73,7 @@
         <meta name="description" content="">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -96,89 +95,59 @@
                 <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Salir</button>
             </a>
         </nav>
+        <%
+            String codigo = request.getParameter("prueba");
+            String codigo1 = codigo;
+            String codigo_curso = "";
+            String codigo_grado = "";
+            String codigo_seccion = "";
 
-        <form  method="post">
+        %>
+        <form  action="Asig_Cate" method="post">
 
             <div class="content-wrapper col-12">
                 <div class="container-fluid ">
                     <br/>
                     <br/>
-                    <h1 align="center">Listado de Usuarios</h1>
+                    <h1 align="center">Listado de Cursos</h1>
                     <table class="col table table-striped table-bordered table-responsive">
                         <thead class="thead-dark">
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">CODIGO</th> 
-                                <th scope="col">ROL</th>    
-                                <th scope="col">NOMBRE</th>  
-                                <th scope="col">TELEFONO</th>  
-                                <th scope="col">DIRECCION</th>  
-                                <th scope="col">CUI/DPI</th>   
-                                <th scope="col">CORREO</th>    
+                                <th scope="col">GRADO</th> 
+                                <th scope="col">CURSO</th>    
+                                <th scope="col">SECCION</th>  
                                 <th scope="col">Proceder</th>   
                             </tr>
                         </thead>
                         <tbody>
-                            <%
-
-                                ResultSet rst = null;
-                                ResultSet rst2 = null;
-                                ResultSet rst3 = null;
+                            <%                                ResultSet rst = null;
 
                                 try {
                                     Consultas co = new Consultas();
 
-                                    rst = co.nombre_encargado_completo();
-                                    rst2 = co.nombre_catedratico_completo();
-                                    rst3 = co.nombre_estudiante_completo();
+                                    rst = co.nombre_grado_curso_seccion();
 
-                                    String codigo = null;
-                                    String rol = null;
-                                    String nombre = null;
-                                    String telefono = null;
-                                    String direccion = null;
-                                    String cui = null;
-                                    String correo = null;
                                     int i = 1;
                                     while (rst.next()) {
 
                                         out.print("<tr><td>" + i + "</td>");
-                                        out.print("<td>" + rst.getString(1) + "</td><td>" + rst.getString(2) + "</td><td>" + rst.getString(3) + "</td><td>" + rst.getString(4) + "</td><td>" + rst.getString(5) + "</td><td>" + rst.getString(6) + "</td><td>" + rst.getString(7) + "</td><td>");
-                                        codigo = rst.getString(1);
+                                        out.print("<td>" + rst.getString(1) + "</td><td>" + rst.getString(2) + "</td><td>" + rst.getString(3) + "</td><td>");
+                                        codigo_grado = rst.getString(4);
+                                        codigo_curso = rst.getString(5);
+                                        codigo_seccion = rst.getString(6);
                             %>
-
-                        <button type="submit" name="prueba" value="<%=codigo%>" class="btn btn-primary">Registrar</button>
-
-                        <%
-                                out.println("</td></tr>");
-                                i++;
-                            }
-                            while (rst2.next()) {
-
-                                out.print("<tr><td>" + i + "</td>");
-                                out.print("<td>" + rst2.getString(1) + "</td><td>" + rst2.getString(2) + "</td><td>" + rst2.getString(3) + "</td><td>" + rst2.getString(4) + "</td><td>" + rst2.getString(5) + "</td><td>" + rst2.getString(6) + "</td><td>" + rst2.getString(7) + "</td><td>");
-                                codigo = rst2.getString(1);
-                        %>
-
-                        <button type="submit" name="prueba" value="<%=codigo%>" class="btn btn-primary">Registrar</button>
+                        <input class=" invisible h-auto" name="codigo_curso" value="<%=codigo_curso%>">
+                        <input class=" invisible h-auto" name="codigo_seccion" value="<%=codigo_seccion%>">
+                        <input class=" invisible h-auto" name="codigo" value="<%=codigo1%>">
+                        <button type="submit" name="codigo_grado" value="<%=codigo_grado%>" class="btn btn-primary">Asignar</button>
 
                         <%
                                 out.println("</td></tr>");
                                 i++;
-                            }
-
-                            while (rst3.next()) {
-
-                                out.print("<tr><td>" + i + "</td>");
-                                out.print("<td>" + rst3.getString(1) + "</td><td>" + rst3.getString(2) + "</td><td>" + rst3.getString(3) + "</td><td>" + rst3.getString(4) + "</td><td>" + rst3.getString(5) + "</td><td>" + rst3.getString(6) + "</td><td> ver encargado </td><td>");
-                                codigo = rst3.getString(1);
-                        %>
-
-                        <button type="submit" name="prueba" value="<%=codigo%>" class="btn btn-primary">Registrar</button>
-
-                        <%
-                                out.println("</td></tr>");
-                                i++;
+                                codigo_grado = " ";
+                                        codigo_curso = " ";
+                                        codigo_seccion =" ";
                             }
 
                         %>

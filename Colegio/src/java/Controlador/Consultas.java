@@ -463,7 +463,7 @@ public class Consultas extends Conexion {
         try {
             PreparedStatement pst = null;
             ResultSet rs = null;
-            String consulta = "select a.COD_CATEDRATICO, b.DESCRIPCION, concat(a.NOMBRE, ' ', a.APELLIDO), a.TELEFONO_1, a.DIRECCION, a.DPI, a.CORREO FROM catedratico a INNER JOIN rol b ON (b.COD_ROL = a.COD_ROL) WHERE 1";
+            String consulta = "select a.COD_CATEDRATICO, b.DESCRIPCION, concat(a.NOMBRE, ' ', a.APELLIDO), a.TELEFONO_1, a.DIRECCION, a.DPI, a.CORREO, a.TITULO FROM catedratico a INNER JOIN rol b ON (b.COD_ROL = a.COD_ROL) WHERE 1";
             pst = getConexion().prepareStatement(consulta);
             rs = pst.executeQuery();
 
@@ -514,6 +514,20 @@ public class Consultas extends Conexion {
             pst.setInt(1, cod_grado);
             rs = pst.executeQuery();
 
+            return rs;
+        } catch (Exception e) {
+        }
+        return null;
+
+    }
+    
+    public ResultSet nombre_grado_curso_seccion() {
+        try {
+            PreparedStatement pst = null;
+            ResultSet rs = null;
+            String consulta = "select b.DESCRIPCION, a.DESCRIPCION, c.DESCRIPCION, b.COD_GRADO, a.COD_CURSO, c.COD_SECCION FROM curso a INNER JOIN grado b ON a.COD_GRADO = b.COD_GRADO INNER JOIN seccion c ON a.COD_GRADO = c.COD_GRADO WHERE 1";
+            pst = getConexion().prepareStatement(consulta);
+            rs = pst.executeQuery();
             return rs;
         } catch (Exception e) {
         }
