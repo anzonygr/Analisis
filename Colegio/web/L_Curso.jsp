@@ -1,7 +1,7 @@
 <%-- 
-    Document   : Padre
-    Created on : 12-may-2019, 12:30:04
-    Author     : ASUS
+    Document   : L_Curso
+    Created on : 16/05/2019, 05:10:28 PM
+    Author     : agonzalez
 --%>
 
 <%@page import="Controlador.Consultas"%>
@@ -101,8 +101,8 @@
                 <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Salir</button>
             </a>
         </nav>
-
-        <form action="L_Curso.jsp" method="post">
+    
+        <form action="L_Estudiante_Tarea.jsp" method="post">
 
             <div class="content-wrapper col-12">
                 <div class="container-fluid ">
@@ -113,9 +113,11 @@
                         <thead class="thead-dark">
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">NOMBRE COMPLETO</th>     
-                                <th scope="col">GRADO</th>  
-                                <th scope="col">SECCION</th>
+                                <th scope="col">GRADO</th> 
+                                <th scope="col">CURSO</th>    
+                                <th scope="col">SECCION</th>  
+                                <th scope="col">CATEDRATICO</th>
+                                <th scope="col">HORARIO</th>   
                                 <th scope="col">PROCEDER</th>   
                             </tr>
                         </thead>
@@ -123,40 +125,18 @@
                             <%
                                 try {
                                     ResultSet rst = null;
-
-                                    int cod_encargado1 = Integer.parseInt(cod_encargado);
+                                    
+                                    int cod_estudiante1 = Integer.parseInt(request.getParameter("prueba"));
                                     Consultas co = new Consultas();
-                                    rst = co.nombre_encargado_estudiante(cod_encargado1);
+
+                                    rst = co.nombre_asignacion_estudiante(cod_estudiante1);
                                     String codigo = null;
                                     int i = 1;
-                                    String nombre = null;
-                                    String grado = null;
-                                    String seccion = null;
-                                    String cod_estudiante = null;
-                                    String nombre2 = null;
-                                    String grado2 = null;
-                                    String seccion2 = null;
-                                    String cod_estudiante2 = null;
                                     while (rst.next()) {
-                                        nombre = rst.getString(1);
-                                        grado = rst.getString(2);
-                                        seccion = rst.getString(3);
-                                        cod_estudiante = rst.getString(4);
-                                        if ((rst.getString(1).equals(nombre2)) && (rst.getString(2).equals(grado2)) && (rst.getString(3).equals(seccion2)) && (rst.getString(4).equals(cod_estudiante2))) {
-                                            nombre2 = nombre;
-                                            grado2 = grado;
-                                            seccion2 = seccion;
-                                            cod_estudiante2 = cod_estudiante;
 
-                                        } else {
-                                            out.print("<tr><td>" + i + "</td>");
-                                            out.print("<td>" + rst.getString(1) + "</td><td>" + rst.getString(2) + "</td><td>" + rst.getString(3)+ "</td><td>");
-                                            codigo = rst.getString(4);
-                                            nombre2 = nombre;
-                                            grado2 = grado;
-                                            seccion2 = seccion;
-                                            cod_estudiante2 = cod_estudiante;
-                                        
+                                        out.print("<tr><td>" + i + "</td>");
+                                        out.print("<td>" + rst.getString(1) + "</td><td>" + rst.getString(2) + "</td><td>" + rst.getString(3) + "</td><td>" + rst.getString(4) + "</td><td>"+ rst.getString(5) + "</td><td>");
+                                        codigo = rst.getString(6)+"-"+rst.getString(7)+"-"+rst.getString(8)+"-"+rst.getString(9)+"-"+cod_estudiante1;
                             %>
 
                         <button type="submit" name="prueba" value="<%=codigo%>" class="btn btn-primary">Ver</button>
@@ -164,7 +144,6 @@
                         <%
                                 out.println("</td></tr>");
                                 i++;
-                                }
                             }
 
                         %>

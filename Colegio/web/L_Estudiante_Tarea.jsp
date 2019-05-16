@@ -1,7 +1,7 @@
 <%-- 
-    Document   : Padre
-    Created on : 12-may-2019, 12:30:04
-    Author     : ASUS
+    Document   : L_Estudiante_Tarea
+    Created on : 16/05/2019, 05:14:51 PM
+    Author     : agonzalez
 --%>
 
 <%@page import="Controlador.Consultas"%>
@@ -101,85 +101,122 @@
                 <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Salir</button>
             </a>
         </nav>
-
-        <form action="L_Curso.jsp" method="post">
+    
+        <form action="L_Estudiante" method="post">
 
             <div class="content-wrapper col-12">
                 <div class="container-fluid ">
                     <br/>
                     <br/>
-                    <h1 align="center">Listado de Cursos</h1>
+
                     <table class="col table table-striped table-bordered table-responsive">
                         <thead class="thead-dark">
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">NOMBRE COMPLETO</th>     
-                                <th scope="col">GRADO</th>  
-                                <th scope="col">SECCION</th>
-                                <th scope="col">PROCEDER</th>   
+                                <th scope="col">CURSO</th> 
+                                <th scope="col">ZONA</th>
+                                <th scope="col">PARCIAL 1</th>
+                                <th scope="col">PARCIAL 2</th>
+                                <th scope="col">EXAMEN</th>
                             </tr>
                         </thead>
                         <tbody>
                             <%
                                 try {
                                     ResultSet rst = null;
+                                    String string = request.getParameter("prueba");
+                                    String[] parts = string.split("-");
+                                    String codigo_grado = parts[0];
+                                    String codigo_curso = parts[1];
+                                    String codigo_seccion = parts[2];
+                                    String codigo_catedratico = parts[3];
+                                    String codigo_estudiante = parts[4];
+                                    int cod_grado = Integer.parseInt(codigo_grado);
+                                    int cod_curso = Integer.parseInt(codigo_curso);
+                                    int cod_seccion = Integer.parseInt(codigo_seccion);
+                                    int cod_catedratico = Integer.parseInt(codigo_catedratico);
+                                    int cod_estudiante1 = Integer.parseInt(codigo_estudiante);
 
-                                    int cod_encargado1 = Integer.parseInt(cod_encargado);
                                     Consultas co = new Consultas();
-                                    rst = co.nombre_encargado_estudiante(cod_encargado1);
-                                    String codigo = null;
+
+                                    rst = co.nombre_list_asignacion_estudiante(cod_grado, cod_curso, cod_seccion, cod_catedratico, cod_estudiante1);
+
                                     int i = 1;
-                                    String nombre = null;
-                                    String grado = null;
-                                    String seccion = null;
-                                    String cod_estudiante = null;
-                                    String nombre2 = null;
-                                    String grado2 = null;
-                                    String seccion2 = null;
-                                    String cod_estudiante2 = null;
                                     while (rst.next()) {
-                                        nombre = rst.getString(1);
-                                        grado = rst.getString(2);
-                                        seccion = rst.getString(3);
-                                        cod_estudiante = rst.getString(4);
-                                        if ((rst.getString(1).equals(nombre2)) && (rst.getString(2).equals(grado2)) && (rst.getString(3).equals(seccion2)) && (rst.getString(4).equals(cod_estudiante2))) {
-                                            nombre2 = nombre;
-                                            grado2 = grado;
-                                            seccion2 = seccion;
-                                            cod_estudiante2 = cod_estudiante;
 
-                                        } else {
-                                            out.print("<tr><td>" + i + "</td>");
-                                            out.print("<td>" + rst.getString(1) + "</td><td>" + rst.getString(2) + "</td><td>" + rst.getString(3)+ "</td><td>");
-                                            codigo = rst.getString(4);
-                                            nombre2 = nombre;
-                                            grado2 = grado;
-                                            seccion2 = seccion;
-                                            cod_estudiante2 = cod_estudiante;
-                                        
+                                        out.print("<tr><td>" + i + "</td>");
+                                        out.print("<td>" + rst.getString(1) + "</td><td>" + rst.getString(2) + "</td><td>" + rst.getString(3) + "</td><td>" + rst.getString(4) + "</td><td>" + rst.getString(5) + "</td></tr>");
+
+                                        i++;
+                                    }
+
                             %>
-
-                        <button type="submit" name="prueba" value="<%=codigo%>" class="btn btn-primary">Ver</button>
-
-                        <%
-                                out.println("</td></tr>");
-                                i++;
-                                }
-                            }
-
-                        %>
                         </tbody>
                     </table>
 
-
+                    <br>
+                    <br>
+                    <h1 align="center">Lista de Tareas</h1>
+                    <br>
+                    <br>
+                    
                 </div>
+                <table class="col table table-striped table-bordered table-responsive">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">NOMBRE</th> 
+                            <th scope="col">DESCRIPCION</th>
+                            <th scope="col">NOTA</th>
+                            <th scope="col">FECHA DE ENTREGA</th>
+                            <th scope="col">ESTADO</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%                            
+                            ResultSet rst2 = null;
+                            ResultSet rst3 = null;
 
+                            Consultas co2 = new Consultas();
+                            
+                            String cod_actividad = "";
+
+                            rst2 = co2.entrega_actividiad_cod_actividad(cod_grado, cod_curso, cod_seccion, cod_catedratico, cod_estudiante1);
+                            
+
+                            while (rst2.next()) {
+                                cod_actividad = rst2.getString(1);
+                            }
+                            int cod_actividad1 = Integer.parseInt(cod_actividad);
+                            
+                            rst3 = co.nombre_entrega_actividad(cod_actividad1, cod_grado, cod_curso, cod_seccion, cod_catedratico, cod_estudiante1);
+                            
+                            String codigo = null;
+                            int i2 = 1;
+                            while (rst3.next()) {
+
+                                out.print("<tr><td>" + i2 + "</td>");
+                                out.print("<td>" + rst3.getString(1) + "</td><td>" + rst3.getString(2) + "</td><td>" + rst3.getString(3) + "</td><td>" + rst3.getString(4) + "</td><td>" + rst3.getString(5) + "</td></tr>");
+                                codigo = Integer.toString(cod_estudiante1);
+
+                                out.println("</td></tr>");
+                                i2++;
+                            }
+
+                        %>
+                    </tbody>
+                    
+                </table>
             </div>
 
             <% } catch (Exception e) {
                     out.print(e.toString());
                 }
             %>
+        
         </form>
+        <div align="center">
+            <a href="Encargado.jsp" type="submit" class="btn btn-primary">Regresar</a>
+        </div>
     </body>
 </html>
