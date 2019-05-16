@@ -178,7 +178,7 @@
                             while (rst3.next()) {
 
                                 out.print("<tr><td>" + i + "</td>");
-                                out.print("<td>" + rst3.getString(1) + "</td><td>" + rst3.getString(2) + "</td><td>" + rst3.getString(3) + "</td><td>" + rst3.getString(4) + "</td><td>" + rst3.getString(5) + "</td><td>" + rst3.getString(6) + "</td><td> ver encargado </td><td>");
+                                out.print("<td>" + rst3.getString(1) + "</td><td>" + rst3.getString(2) + "</td><td>" + rst3.getString(3) + "</td><td>" + rst3.getString(4) + "</td><td>" + rst3.getString(5) + "</td><td>" + rst3.getString(6) + "</td><td>" + rst3.getString(7) + "</td><td>");
                                 codigo = rst3.getString(1);
                         %>
 

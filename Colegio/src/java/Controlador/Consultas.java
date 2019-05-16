@@ -85,10 +85,10 @@ public class Consultas extends Conexion {
         return false;
     }
 
-    public boolean regis_estudiante(int cod_estudiante, int cod_rol, String nombre, String apellido, int telefono1, int telefono2, String sexo, String direccion, String cui, String fecha_nacimiento, int cod_grado, int cod_encargado) {
+    public boolean regis_estudiante(int cod_estudiante, int cod_rol, String nombre, String apellido, int telefono1, int telefono2, String sexo, String direccion, String cui, String fecha_nacimiento, int cod_grado, int cod_encargado, String correo) {
         PreparedStatement pst = null;
         try {
-            String consulta = "INSERT INTO estudiante (COD_ESTUDIANTE, COD_ROL, NOMBRE, APELLIDO, TELEFONO_1, TELEFONO_2, SEXO, DIRECCION, CUI, FECHA_NACIMIENTO, COD_GRADO, COD_ENCARGADO) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+            String consulta = "INSERT INTO estudiante (COD_ESTUDIANTE, COD_ROL, NOMBRE, APELLIDO, TELEFONO_1, TELEFONO_2, SEXO, DIRECCION, CUI, FECHA_NACIMIENTO, COD_GRADO, COD_ENCARGADO, CORREO) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
             pst = getConexion().prepareStatement(consulta);
             pst.setInt(1, cod_estudiante);
             pst.setInt(2, cod_rol);
@@ -102,6 +102,7 @@ public class Consultas extends Conexion {
             pst.setString(10, fecha_nacimiento);
             pst.setInt(11, cod_grado);
             pst.setInt(12, cod_encargado);
+            pst.setString(13, correo);
             if (pst.executeUpdate() == 1) {
                 return true;
             }
@@ -626,7 +627,7 @@ public class Consultas extends Conexion {
         try {
             PreparedStatement pst = null;
             ResultSet rs = null;
-            String consulta = "select a.COD_ESTUDIANTE, b.DESCRIPCION, concat(a.NOMBRE, ' ', a.APELLIDO), a.TELEFONO_1, a.DIRECCION, a.CUI  FROM estudiante a INNER JOIN rol b ON (b.COD_ROL = a.COD_ROL) WHERE 1";
+            String consulta = "select a.COD_ESTUDIANTE, b.DESCRIPCION, concat(a.NOMBRE, ' ', a.APELLIDO), a.TELEFONO_1, a.DIRECCION, a.CUI, a.CORREO  FROM estudiante a INNER JOIN rol b ON (b.COD_ROL = a.COD_ROL) WHERE 1";
             pst = getConexion().prepareStatement(consulta);
             rs = pst.executeQuery();
 

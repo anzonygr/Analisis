@@ -84,7 +84,7 @@ public class R_Estudiante extends HttpServlet {
             }
             rst2 = co.nombre_grado_curso(cod_grado);
 
-            if (co2.regis_estudiante(cod_estudiante, cod_rol, nombre, apellido, telefono1, telefono2, sexo, direccion, cui, fecha, cod_grado, cod_encargado)) {
+            if (co2.regis_estudiante(cod_estudiante, cod_rol, nombre, apellido, telefono1, telefono2, sexo, direccion, cui, fecha, cod_grado, cod_encargado, usuario)) {
                 if (co3.registrar(cod_rol, cod_login, usuario, contraseña)) {
                     while (rst2.next()) {
                         cod_asignacion = co.asignacion();
