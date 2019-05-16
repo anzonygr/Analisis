@@ -500,6 +500,25 @@ public class Consultas extends Conexion {
 
     }
     
+    public ResultSet entrega_actividiad_cod_actividad(int cod_grado, int cod_curso, int cod_seccion, int cod_catedratico, int cod_estudiante) {
+        try {
+            PreparedStatement pst = null;
+            ResultSet rs = null;
+            String consulta = "Select COD_ACTIVIDAD from entrega_actividad WHERE COD_GRADO = ? AND COD_CURSO = ? AND COD_SECCION = ? AND COD_CATEDRATICO = ? AND COD_ESTUDIANTE = ?";
+            pst = getConexion().prepareStatement(consulta);
+            pst.setInt(1, cod_grado);
+            pst.setInt(2, cod_curso);
+            pst.setInt(3, cod_seccion);
+            pst.setInt(4, cod_catedratico);
+            pst.setInt(5, cod_estudiante);
+            rs = pst.executeQuery();
+            return rs;
+        } catch (Exception e) {
+        }
+        return null;
+
+    }
+    
     public ResultSet actividiad_cod_asignacion(int cod_grado, int cod_curso, int cod_seccion, int cod_catedratico) {
         try {
             PreparedStatement pst = null;
@@ -728,6 +747,21 @@ public class Consultas extends Conexion {
         return null;
 
     }
+    
+    public ResultSet nombre_asignacion_estudiante(int cod_estudiante) {
+        try {
+            PreparedStatement pst = null;
+            ResultSet rs = null;
+            String consulta = "select b.DESCRIPCION, d.DESCRIPCION, c.DESCRIPCION, concat(e.NOMBRE,' ', e.APELLIDO), a.HORARIO, b.COD_GRADO, d.COD_CURSO, c.COD_SECCION, e.COD_CATEDRATICO FROM asignacion a INNER JOIN grado b ON a.COD_GRADO = b.COD_GRADO INNER JOIN seccion c ON (a.COD_GRADO = c.COD_GRADO) AND (a.COD_SECCION = c.COD_SECCION) INNER JOIN curso d ON (a.COD_GRADO = d.COD_GRADO) AND (a.COD_CURSO = d.COD_CURSO) INNER JOIN catedratico e ON (a.COD_CATEDRATICO = e.COD_CATEDRATICO) WHERE a.COD_ESTUDIANTE = ?";
+            pst = getConexion().prepareStatement(consulta);
+            pst.setInt(1, cod_estudiante);
+            rs = pst.executeQuery();
+            return rs;
+        } catch (Exception e) {
+        }
+        return null;
+
+    }
 
     public ResultSet nombre_list_asignacion(int cod_grado, int cod_curso, int cod_seccion, int cod_catedratico) {
         try {
@@ -739,6 +773,25 @@ public class Consultas extends Conexion {
             pst.setInt(2, cod_curso);
             pst.setInt(3, cod_seccion);
             pst.setInt(4, cod_catedratico);
+            rs = pst.executeQuery();
+            return rs;
+        } catch (Exception e) {
+        }
+        return null;
+
+    }
+    
+    public ResultSet nombre_list_asignacion_estudiante(int cod_grado, int cod_curso, int cod_seccion, int cod_catedratico, int cod_estudiante) {
+        try {
+            PreparedStatement pst = null;
+            ResultSet rs = null;
+            String consulta = "select b.DESCRIPCION, a.ZONA, a.PARCIAL_1, a.PARCIAL_2, a.EXAMEN_FINAL from asignacion a INNER JOIN curso b ON a.COD_CURSO = b.COD_CURSO WHERE a.COD_GRADO = ? AND a.COD_CURSO = ? AND a.COD_SECCION = ? AND a.COD_CATEDRATICO = ? AND a.COD_ESTUDIANTE = ?";
+            pst = getConexion().prepareStatement(consulta);
+            pst.setInt(1, cod_grado);
+            pst.setInt(2, cod_curso);
+            pst.setInt(3, cod_seccion);
+            pst.setInt(4, cod_catedratico);
+            pst.setInt(5, cod_estudiante);
             rs = pst.executeQuery();
             return rs;
         } catch (Exception e) {
@@ -782,6 +835,28 @@ public class Consultas extends Conexion {
 
     }
 
+    public ResultSet nombre_entrega_actividad(int cod_actividad, int cod_grado, int cod_curso, int cod_seccion, int cod_catedratico, int cod_estudiante) {
+        try {
+            PreparedStatement pst = null;
+            ResultSet rs = null;
+            String consulta = "select b.TITULO, b.DESCRIPCION, a.NOTA, b.FECHA_ENTREGA, a.ESTADO from entrega_actividad a INNER JOIN actividad b ON a.COD_ACTIVIDAD = b.COD_ACTIVIDAD AND a.COD_GRADO = b.COD_GRADO AND a.COD_CURSO = b.COD_CURSO AND a.COD_SECCION = b.COD_SECCION AND a.COD_CATEDRATICO = b.COD_CATEDRATICO WHERE a.COD_ACTIVIDAD = ? AND a.COD_GRADO = ? AND a.COD_CURSO = ? AND a.COD_SECCION = ? AND a.COD_CATEDRATICO = ? AND a.COD_ESTUDIANTE = ?";
+            pst = getConexion().prepareStatement(consulta);
+            pst.setInt(1, cod_actividad);
+            pst.setInt(2, cod_grado);
+            pst.setInt(3, cod_curso);
+            pst.setInt(4, cod_seccion);
+            pst.setInt(5, cod_catedratico);
+            pst.setInt(6, cod_estudiante);
+            rs = pst.executeQuery();
+            return rs;
+        } catch (Exception e) {
+        }
+        return null;
+
+    }
+
+    
+    
 //   public static void main(String[] args){
 //        Consultas co = new Consultas();
 //        System.out.println(co.regis_entrega_actividad(3,2, 2, 4, 1, 2, 1, 5, "descripcion", 10, "fecha"));
@@ -789,9 +864,9 @@ public class Consultas extends Conexion {
     public static void main(String[] args) {
         Consultas co = new Consultas();
         try {
-            ResultSet rst = co.nombre_estudiante_asignacion(4, 1, 2, 1);
+            ResultSet rst = co.nombre_entrega_actividad(2,4, 1, 1, 1, 2);
             while (rst.next()) {
-                String nombre_encargado = rst.getString(1);
+                String nombre_encargado = rst.getString(1)+" "+rst.getString(2)+" "+rst.getString(3)+" "+rst.getString(4)+" "+rst.getString(5);
                 System.out.println(nombre_encargado);
             }
         } catch (SQLException ex) {
