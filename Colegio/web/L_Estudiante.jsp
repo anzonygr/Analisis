@@ -10,11 +10,12 @@
 <!DOCTYPE html>
 <%
     HttpSession objsession = request.getSession(false);
-    String usuario = (String) objsession.getAttribute("usuario");
-    String numero = (String) objsession.getAttribute("numero");
+    String usuario = (String)objsession.getAttribute("usuario");
+    String numero = (String)objsession.getAttribute("numero");
+    String cod_catedratico = (String)objsession.getAttribute("cod_catedratico");
     if (usuario == null) {
-        response.sendRedirect("index.jsp?error=No haz iniciado sesion");
-    }
+                response.sendRedirect("index.jsp?error=No haz iniciado sesion");
+            }
 %>
 <html>
     <head>
@@ -136,11 +137,11 @@
                                     int cod_grado = Integer.parseInt(codigo_grado);
                                     int cod_curso = Integer.parseInt(codigo_curso);
                                     int cod_seccion = Integer.parseInt(codigo_seccion);
-                                    int cod_catedratico = Integer.parseInt(codigo_catedratico);
+                                    int cod_catedratico1 = Integer.parseInt(codigo_catedratico);
 
                                     Consultas co = new Consultas();
 
-                                    rst = co.nombre_list_asignacion(cod_grado, cod_curso, cod_seccion, cod_catedratico);
+                                    rst = co.nombre_list_asignacion(cod_grado, cod_curso, cod_seccion, cod_catedratico1);
                                     rst2 = co.nombre_catedratico_completo();
                                     rst3 = co.nombre_estudiante_completo();
 
@@ -150,7 +151,7 @@
 
                                         out.print("<tr><td>" + i + "</td>");
                                         out.print("<td>" + rst.getString(1) + "</td><td>" + rst.getString(2) + "</td><td>" + rst.getString(3) + "</td><td>" + rst.getString(4) + "</td><td>" + rst.getString(5) + "</td><td>" + rst.getString(6) + "</td><td>" + rst.getString(7) + "</td><td>" + rst.getString(8) + "</td><td>");
-                                        codigo = numero;
+                                        codigo = cod_catedratico;
 
                             %>
 

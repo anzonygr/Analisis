@@ -57,43 +57,50 @@ public class R_Estudiante extends HttpServlet {
             int cod_grado = 0;
             int cod_curso = 0;
             String horario = "15:30";
-            int cod_catedratico = 1;
+            int cod_catedratico = 0;
             int zona = 20;
             int parcial_1 = 7;
             int parcial_2 = 15;
             int examen_final = 40;
             int test = 0;
             String estado = "asignado";
+
             ResultSet rst = null;
             ResultSet rst2 = null;
+            ResultSet rst3 = null;
 
             Consultas co = new Consultas();
+            Consultas co2 = new Consultas();
+            Consultas co3 = new Consultas();
+            Consultas co5 = new Consultas();
+            
             cod_login = co.login();
+            
             cod_estudiante = co.estudiante();
 
             rst = co.cod_grado_seccion(cod_seccion);
-
             while (rst.next()) {
                 cod_grado = Integer.parseInt(rst.getString(1));
             }
-
             rst2 = co.nombre_grado_curso(cod_grado);
 
-            Consultas co2 = new Consultas();
-            Consultas co3 = new Consultas();
-            
-
             if (co2.regis_estudiante(cod_estudiante, cod_rol, nombre, apellido, telefono1, telefono2, sexo, direccion, cui, fecha, cod_grado, cod_encargado)) {
-                cod_asignacion = co.asignacion();
+                if (co3.registrar(cod_rol, cod_login, usuario, contraseña)) {
+                    while (rst2.next()) {
+                        cod_asignacion = co.asignacion();
+                        cod_curso = Integer.parseInt(rst2.getString(1));
 
-                while (rst2.next()) {
-                    cod_asignacion = co.asignacion();
-                    cod_curso = Integer.parseInt(rst2.getString(1));
-                    Consultas co4 = new Consultas();
-                    co4.regis_asignacion(cod_asignacion, cod_grado, cod_curso, cod_seccion, cod_catedratico, cod_estudiante, horario, zona, parcial_1, parcial_2, examen_final, estado);
-                }
-                if (co3.registrar(cod_rol, cod_login, usuario, contraseña)){
+                        rst3 = co5.nombre_catedratico_asignacion(cod_grado, cod_curso, cod_seccion);
+                        while (rst3.next()) {
+                            cod_catedratico = Integer.parseInt(rst3.getString(1));
+                            Consultas co4 = new Consultas();
+                            co4.regis_asignacion(cod_asignacion, cod_grado, cod_curso, cod_seccion, cod_catedratico, cod_estudiante, horario, zona, parcial_1, parcial_2, examen_final, estado);
+                        }
+                    }
+
                     response.sendRedirect("Administrador.jsp");
+                } else {
+                    response.sendRedirect("Usuario.jsp");
                 }
             } else {
                 response.sendRedirect("Registro_Catedratico.jsp");

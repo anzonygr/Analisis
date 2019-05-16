@@ -46,7 +46,7 @@ public class Asignacion_Curso_Catedratico extends HttpServlet {
         int cod_curso = Integer.parseInt(codigo_curso);
         int cod_seccion = Integer.parseInt(codigo_seccion);
         int cod_asignacion = 0;
-        int cod_estudiante = 1;
+        int cod_estudiante = 0;
         String horario = "15:30";
         int zona = 0;
         int parcial_1 = 0;

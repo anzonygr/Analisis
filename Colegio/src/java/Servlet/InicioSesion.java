@@ -48,11 +48,14 @@ public class InicioSesion extends HttpServlet {
             String padre = "4";
             String estudiante = "3";
             String numero = null;
+            String cod_catedratico = null;
+            String cod_estudiante = null;
+            String cod_encargado = null;
             String sql = "select * from login";
             pst = coo.getConexion().prepareStatement(sql);
             rst = pst.executeQuery();
             while (rst.next()) {
-                if ((usuario.equals(rst.getString(3)))&&(contraseña.equals(rst.getString(4)))) {
+                if ((usuario.equals(rst.getString(3))) && (contraseña.equals(rst.getString(4)))) {
                     numero = rst.getString(1);
                     break;
                 }
@@ -64,17 +67,35 @@ public class InicioSesion extends HttpServlet {
                     objsesion.setAttribute("usuario", usuario);
                     objsesion.setAttribute("numero", numero);
                     response.sendRedirect("Administrador.jsp");
-                }   if (numero.equals(catedratico)){
+                } else if (numero.equals(catedratico)) {
+                    Consultas co2 = new Consultas();
+                    ResultSet rst2 = co2.cod_usuario_login_catedratico(usuario);
+                    while (rst2.next()) {
+                        cod_catedratico = rst2.getString(1);
+                    }
                     objsesion.setAttribute("usuario", usuario);
                     objsesion.setAttribute("numero", numero);
+                    objsesion.setAttribute("cod_catedratico", cod_catedratico);
                     response.sendRedirect("Catedratico.jsp");
-                }if (numero.equals(padre)){
+                } else if (numero.equals(padre)) {
+                    Consultas co3 = new Consultas();
+                    ResultSet rst2 = co3.cod_usuario_login_encargado(usuario);
+                    while (rst2.next()) {
+                        cod_encargado = rst2.getString(1);
+                    }
                     objsesion.setAttribute("usuario", usuario);
                     objsesion.setAttribute("numero", numero);
+                    objsesion.setAttribute("cod_encargado", cod_encargado);
                     response.sendRedirect("Padre.jsp");
-                }if (numero.equals(estudiante)){
+                } else if (numero.equals(estudiante)) {
+                    Consultas co4 = new Consultas();
+                    ResultSet rst2 = co4.cod_usuario_login_estudiante(usuario);
+                    while (rst2.next()) {
+                        cod_estudiante = rst2.getString(1);
+                    }
                     objsesion.setAttribute("usuario", usuario);
                     objsesion.setAttribute("numero", numero);
+                    objsesion.setAttribute("cod_estudiante", cod_estudiante);
                     response.sendRedirect("Estudiante.jsp");
                 }
             } else {

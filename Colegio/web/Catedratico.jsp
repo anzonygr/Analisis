@@ -12,10 +12,12 @@
     HttpSession objsession = request.getSession(false);
     String usuario = (String)objsession.getAttribute("usuario");
     String numero = (String)objsession.getAttribute("numero");
+    String cod_catedratico = (String)objsession.getAttribute("cod_catedratico");
     if (usuario == null) {
                 response.sendRedirect("index.jsp?error=No haz iniciado sesion");
             }
 %>
+
 <html>
      <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -119,26 +121,21 @@
                         </thead>
                         <tbody>
                             <%
-
+                                
                                 ResultSet rst = null;
-                                ResultSet rst2 = null;
-                                ResultSet rst3 = null;
 
                                 try {
-                                    int cod_catedratico = Integer.parseInt(numero);
+                                    int cod_catedratico1 = Integer.parseInt(cod_catedratico);
                                     Consultas co = new Consultas();
 
-                                    rst = co.nombre_asignacion(cod_catedratico);
-                                    rst2 = co.nombre_catedratico_completo();
-                                    rst3 = co.nombre_estudiante_completo();
-
+                                    rst = co.nombre_asignacion(cod_catedratico1);
                                     String codigo = null;
                                     int i = 1;
                                     while (rst.next()) {
 
                                         out.print("<tr><td>" + i + "</td>");
                                         out.print("<td>" + rst.getString(1) + "</td><td>" + rst.getString(2) + "</td><td>" + rst.getString(3) + "</td><td>" + rst.getString(4) + "</td><td>");
-                                        codigo = rst.getString(5)+"-"+rst.getString(6)+"-"+rst.getString(7)+"-"+numero;
+                                        codigo = rst.getString(5)+"-"+rst.getString(6)+"-"+rst.getString(7)+"-"+cod_catedratico1;
                             %>
 
                         <button type="submit" name="prueba" value="<%=codigo%>" class="btn btn-primary">Ingresar</button>

@@ -9,11 +9,12 @@
 <!DOCTYPE html>
 <%
     HttpSession objsession = request.getSession(false);
-    String usuario = (String) objsession.getAttribute("usuario");
-    String numero = (String) objsession.getAttribute("numero");
+    String usuario = (String)objsession.getAttribute("usuario");
+    String numero = (String)objsession.getAttribute("numero");
+    String cod_catedratico = (String)objsession.getAttribute("cod_catedratico");
     if (usuario == null) {
-        response.sendRedirect("index.jsp?error=No haz iniciado sesion");
-    }
+                response.sendRedirect("index.jsp?error=No haz iniciado sesion");
+            }
 %>
 <html>
     <head>
