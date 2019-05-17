@@ -112,52 +112,51 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="inputAddress">Nombre</label>
-                    <input type="text" name="nombre_estudiante" class="form-control" id="inputAddress" placeholder="Alex Rodriguez">
+                    <input type="text" name="nombre_estudiante" class="form-control" id="inputAddress" placeholder="Alex Rodriguez" required>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="inputAddress">Apellido</label>
-                    <input type="text" name="apellido_estudiante" class="form-control" id="inputAddress" placeholder="Alex Rodriguez">
+                    <input type="text" name="apellido_estudiante" class="form-control" id="inputAddress" placeholder="Alex Rodriguez" required>
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="inputEmail4">Email</label>
-                    <input type="email" name="email_estudiante" class="form-control" id="inputEmail4" placeholder="Email">
+                    <input type="email" name="email_estudiante" class="form-control" id="inputEmail4" placeholder="Email" required>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="inputPassword4">Password</label>
-                    <input type="password" name="password_estudiante" class="form-control" id="inputPassword4" placeholder="Password">
+                    <input type="password" name="password_estudiante" class="form-control" id="inputPassword4" placeholder="Password" required>
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="inputAddress2">Direccion</label>
-                <input type="text" name="direccion_estudiante" class="form-control" id="inputAddress2" placeholder="Apartmento, o piso">
+                <input type="text" name="direccion_estudiante" class="form-control" id="inputAddress2" placeholder="Apartmento, o piso" required>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="inputCity">Telefono 1</label>
-                    <input type="text" name="telefono1_estudiante" class="form-control" id="inputCity" placeholder="12345678">
+                    <input type="text" name="telefono1_estudiante" class="form-control" id="inputCity" placeholder="12345678" required>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="inputCity">Telefono 2</label>
-                    <input type="text" name="telefono2_estudiante" class="form-control" id="inputCity" placeholder="12345678">
+                    <input type="text" name="telefono2_estudiante" class="form-control" id="inputCity" placeholder="12345678" required>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="inputState">Sexo</label>
-                    <select name="sexo_estudiante" id="inputState" class="form-control">
-                        <option selected>Opciones...</option>
+                    <select name="sexo_estudiante" id="inputState" class="form-control" required>
                         <option value="MASCULINO">Masculino</option>
                         <option value="FEMENINO">Femenino</option>
                     </select>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="inputCity">CUI</label>
-                    <input type="text" name="cui_estudiante" class="form-control" id="inputCity" placeholder="12345678">
+                    <input type="text" name="cui_estudiante" class="form-control" id="inputCity" placeholder="12345678" required> 
                 </div>
                 <div class="form-group col-md-6">
                     <label for="inputCity">Fecha de Nacimiento</label>
-                    <input type="text" name="fecha_estudiante" class="form-control" id="inputCity" placeholder="01-05-2019">
+                    <input type="text" name="fecha_estudiante" class="form-control" id="inputCity" placeholder="01-05-2019" required>
                 </div>
                 <%
                     ResultSet rst = null;
@@ -167,7 +166,7 @@
                 %>
                 <div class="form-group col-md-6">
                     <label for="inputState">Grado</label>
-                    <select name="seccion_estudiante" id="inputState" class="form-control">
+                    <select name="seccion_estudiante" id="inputState" class="form-control" required>
                         <%
                             rst2 = co.nombre_grado_seccion();
                             while (rst2.next()) {
@@ -182,7 +181,7 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label for="inputState">Encargado</label>
-                    <select name="encargado" id="inputState" class="form-control">
+                    <select name="encargado" id="inputState" class="form-control" required>
                         <%
                             rst = co.nombre_encargado();
                             while (rst.next()) {

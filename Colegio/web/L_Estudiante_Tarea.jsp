@@ -186,7 +186,7 @@
 
                             while (rst2.next()) {
                                 cod_actividad = rst2.getString(1);
-                            }
+                            
                             int cod_actividad1 = Integer.parseInt(cod_actividad);
                             
                             rst3 = co.nombre_entrega_actividad(cod_actividad1, cod_grado, cod_curso, cod_seccion, cod_catedratico, cod_estudiante1);
@@ -196,13 +196,12 @@
                             while (rst3.next()) {
 
                                 out.print("<tr><td>" + i2 + "</td>");
-                                out.print("<td>" + rst3.getString(1) + "</td><td>" + rst3.getString(2) + "</td><td>" + rst3.getString(3) + "</td><td>" + rst3.getString(4) + "</td><td>" + rst3.getString(5) + "</td></tr>");
+                                out.print("<td>" + rst3.getString(1) + "</td><td>" + rst3.getString(2) + "</td><td>" + rst3.getString(3) + " / " + rst3.getString(4) + "</td><td>" + rst3.getString(5) + "</td><td>"+ rst3.getString(6)+"</td></tr>");
                                 codigo = Integer.toString(cod_estudiante1);
 
-                                out.println("</td></tr>");
                                 i2++;
                             }
-
+                            }
                         %>
                     </tbody>
                     
@@ -216,7 +215,7 @@
         
         </form>
         <div align="center">
-            <a href="Encargado.jsp" type="submit" class="btn btn-primary">Regresar</a>
+            <a href="Padre.jsp" type="submit" class="btn btn-primary">Regresar</a>
         </div>
     </body>
 </html>

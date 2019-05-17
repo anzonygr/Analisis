@@ -854,7 +854,7 @@ public class Consultas extends Conexion {
         try {
             PreparedStatement pst = null;
             ResultSet rs = null;
-            String consulta = "select b.TITULO, b.DESCRIPCION, a.NOTA, b.FECHA_ENTREGA, a.ESTADO from entrega_actividad a INNER JOIN actividad b ON a.COD_ACTIVIDAD = b.COD_ACTIVIDAD AND a.COD_GRADO = b.COD_GRADO AND a.COD_CURSO = b.COD_CURSO AND a.COD_SECCION = b.COD_SECCION AND a.COD_CATEDRATICO = b.COD_CATEDRATICO WHERE a.COD_ACTIVIDAD = ? AND a.COD_GRADO = ? AND a.COD_CURSO = ? AND a.COD_SECCION = ? AND a.COD_CATEDRATICO = ? AND a.COD_ESTUDIANTE = ?";
+            String consulta = "select b.TITULO, b.DESCRIPCION, a.NOTA, b.NOTA, b.FECHA_ENTREGA, a.ESTADO from entrega_actividad a INNER JOIN actividad b ON a.COD_ACTIVIDAD = b.COD_ACTIVIDAD AND a.COD_GRADO = b.COD_GRADO AND a.COD_CURSO = b.COD_CURSO AND a.COD_SECCION = b.COD_SECCION AND a.COD_CATEDRATICO = b.COD_CATEDRATICO WHERE a.COD_ACTIVIDAD = ? AND a.COD_GRADO = ? AND a.COD_CURSO = ? AND a.COD_SECCION = ? AND a.COD_CATEDRATICO = ? AND a.COD_ESTUDIANTE = ?";
             pst = getConexion().prepareStatement(consulta);
             pst.setInt(1, cod_actividad);
             pst.setInt(2, cod_grado);
@@ -874,43 +874,54 @@ public class Consultas extends Conexion {
 //        Consultas co = new Consultas();
 //        System.out.println(co.regis_entrega_actividad(3,2, 2, 4, 1, 2, 1, 5, "descripcion", 10, "fecha"));
 //      }
+//    public static void main(String[] args) {
+//        Consultas co = new Consultas();
+//        try {
+//            ResultSet rst = co.nombre_encargado_estudiante(2);
+//            String nombre = null;
+//            String grado = null;
+//            String seccion = null;
+//            String cod_estudiante = null;
+//            String nombre2 = null;
+//            String grado2 = null;
+//            String seccion2 = null;
+//            String cod_estudiante2 = null;
+//            while (rst.next()) {
+//                nombre = rst.getString(1);
+//                grado = rst.getString(2);
+//                seccion = rst.getString(3);
+//                cod_estudiante = rst.getString(4);
+//                if ((rst.getString(1).equals(nombre2)) && (rst.getString(2).equals(grado2)) && (rst.getString(3).equals(seccion2)) && (rst.getString(4).equals(cod_estudiante2))) {
+//
+//                    nombre2 = nombre;
+//                    grado2 = grado;
+//                    seccion2 = seccion;
+//                    cod_estudiante2 = cod_estudiante;
+//
+//                } else {
+//                    String nombre_encargado = rst.getString(1) + " " + rst.getString(2) + " " + rst.getString(3) + " " + rst.getString(4);
+//                    System.out.println(nombre_encargado);
+//
+//                    nombre2 = nombre;
+//                    grado2 = grado;
+//                    seccion2 = seccion;
+//                    cod_estudiante2 = cod_estudiante;
+//                }
+//            }
+//        } catch (SQLException ex) {
+//
+//        }
+//    }
     public static void main(String[] args) {
         Consultas co = new Consultas();
         try {
-            ResultSet rst = co.nombre_encargado_estudiante(2);
-            String nombre = null;
-            String grado = null;
-            String seccion = null;
-            String cod_estudiante = null;
-            String nombre2 = null;
-            String grado2 = null;
-            String seccion2 = null;
-            String cod_estudiante2 = null;
+            ResultSet rst = co.nombre_list_asignacion_estudiante(4, 1, 1, 1, 2);
             while (rst.next()) {
-                nombre = rst.getString(1);
-                grado = rst.getString(2);
-                seccion = rst.getString(3);
-                cod_estudiante = rst.getString(4);
-                if ((rst.getString(1).equals(nombre2)) && (rst.getString(2).equals(grado2)) && (rst.getString(3).equals(seccion2)) && (rst.getString(4).equals(cod_estudiante2))) {
-
-                    nombre2 = nombre;
-                    grado2 = grado;
-                    seccion2 = seccion;
-                    cod_estudiante2 = cod_estudiante;
-
-                } else {
-                    String nombre_encargado = rst.getString(1) + " " + rst.getString(2) + " " + rst.getString(3) + " " + rst.getString(4);
+                String nombre_encargado = rst.getString(1) + " " + rst.getString(2) + " " + rst.getString(3) + " " + rst.getString(4)+ " " + rst.getString(5);
                     System.out.println(nombre_encargado);
-
-                    nombre2 = nombre;
-                    grado2 = grado;
-                    seccion2 = seccion;
-                    cod_estudiante2 = cod_estudiante;
-                }
             }
-        } catch (SQLException ex) {
-
+        }catch (SQLException ex) {
+            
         }
     }
-
 }

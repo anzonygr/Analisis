@@ -11,11 +11,11 @@
 <!DOCTYPE html>
 <%
     HttpSession objsession = request.getSession(false);
-    String usuario = (String)objsession.getAttribute("usuario");
-    String numero = (String)objsession.getAttribute("numero");
+    String usuario = (String) objsession.getAttribute("usuario");
+    String numero = (String) objsession.getAttribute("numero");
     if (usuario == null) {
-                response.sendRedirect("index.jsp?error=No haz iniciado sesion");
-            }
+        response.sendRedirect("index.jsp?error=No haz iniciado sesion");
+    }
 %>
 <html>
     <head>
@@ -122,13 +122,11 @@
                                 <th scope="col">TELEFONO</th>  
                                 <th scope="col">DIRECCION</th>  
                                 <th scope="col">CUI/DPI</th>   
-                                <th scope="col">CORREO</th>    
-                                <th scope="col">Proceder</th>   
+                                <th scope="col">CORREO</th>  
                             </tr>
                         </thead>
                         <tbody>
                             <%
-
                                 ResultSet rst = null;
                                 ResultSet rst2 = null;
                                 ResultSet rst3 = null;
@@ -153,55 +151,40 @@
                                         out.print("<tr><td>" + i + "</td>");
                                         out.print("<td>" + rst.getString(1) + "</td><td>" + rst.getString(2) + "</td><td>" + rst.getString(3) + "</td><td>" + rst.getString(4) + "</td><td>" + rst.getString(5) + "</td><td>" + rst.getString(6) + "</td><td>" + rst.getString(7) + "</td><td>");
                                         codigo = rst.getString(1);
+
+                                        out.println("</td></tr>");
+                                        i++;
+                                    }
+                                    while (rst2.next()) {
+
+                                        out.print("<tr><td>" + i + "</td>");
+                                        out.print("<td>" + rst2.getString(1) + "</td><td>" + rst2.getString(2) + "</td><td>" + rst2.getString(3) + "</td><td>" + rst2.getString(4) + "</td><td>" + rst2.getString(5) + "</td><td>" + rst2.getString(6) + "</td><td>" + rst2.getString(7) + "</td><td>");
+                                        codigo = rst2.getString(1);
+
+                                        out.println("</td></tr>");
+                                        i++;
+                                    }
+
+                                    while (rst3.next()) {
+
+                                        out.print("<tr><td>" + i + "</td>");
+                                        out.print("<td>" + rst3.getString(1) + "</td><td>" + rst3.getString(2) + "</td><td>" + rst3.getString(3) + "</td><td>" + rst3.getString(4) + "</td><td>" + rst3.getString(5) + "</td><td>" + rst3.getString(6) + "</td><td>" + rst3.getString(7) + "</td><td>");
+                                        codigo = rst3.getString(1);
+
+                                        out.println("</td></tr>");
+                                        i++;
+                                    }
+                                } catch (Exception e) {
+                                    out.print(e.toString());
+                                }
                             %>
-
-                        <button type="submit" name="prueba" value="<%=codigo%>" class="btn btn-primary">Registrar</button>
-
-                        <%
-                                out.println("</td></tr>");
-                                i++;
-                            }
-                            while (rst2.next()) {
-
-                                out.print("<tr><td>" + i + "</td>");
-                                out.print("<td>" + rst2.getString(1) + "</td><td>" + rst2.getString(2) + "</td><td>" + rst2.getString(3) + "</td><td>" + rst2.getString(4) + "</td><td>" + rst2.getString(5) + "</td><td>" + rst2.getString(6) + "</td><td>" + rst2.getString(7) + "</td><td>");
-                                codigo = rst2.getString(1);
-                        %>
-
-                        <button type="submit" name="prueba" value="<%=codigo%>" class="btn btn-primary">Registrar</button>
-
-                        <%
-                                out.println("</td></tr>");
-                                i++;
-                            }
-
-                            while (rst3.next()) {
-
-                                out.print("<tr><td>" + i + "</td>");
-                                out.print("<td>" + rst3.getString(1) + "</td><td>" + rst3.getString(2) + "</td><td>" + rst3.getString(3) + "</td><td>" + rst3.getString(4) + "</td><td>" + rst3.getString(5) + "</td><td>" + rst3.getString(6) + "</td><td>" + rst3.getString(7) + "</td><td>");
-                                codigo = rst3.getString(1);
-                        %>
-
-                        <button type="submit" name="prueba" value="<%=codigo%>" class="btn btn-primary">Registrar</button>
-
-                        <%
-                                out.println("</td></tr>");
-                                i++;
-                            }
-
-                        %>
                         </tbody>
                     </table>
-
 
                 </div>
 
             </div>
 
-            <% } catch (Exception e) {
-                    out.print(e.toString());
-                }
-            %>
         </form>
     </body>
 </html>

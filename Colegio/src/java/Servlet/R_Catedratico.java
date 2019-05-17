@@ -63,7 +63,7 @@ public class R_Catedratico extends HttpServlet {
                 if (co3.registrar(cod_rol, cod_login, usuario, contraseña)) {
                     response.sendRedirect("Administrador.jsp");
                 } else {
-                    response.sendRedirect("Registro_Estudiante.jsp");
+                    response.sendRedirect("Registro_Catedratico.jsp");
                 }
             } else {
                 response.sendRedirect("Registro_Catedratico.jsp");

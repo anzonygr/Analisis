@@ -100,10 +100,10 @@ public class R_Estudiante extends HttpServlet {
 
                     response.sendRedirect("Administrador.jsp");
                 } else {
-                    response.sendRedirect("Usuario.jsp");
+                    response.sendRedirect("Registro_Estudiante.jsp");
                 }
             } else {
-                response.sendRedirect("Registro_Catedratico.jsp");
+                response.sendRedirect("Registro_Estudiante.jsp");
             }
 
         } catch (Exception e) {

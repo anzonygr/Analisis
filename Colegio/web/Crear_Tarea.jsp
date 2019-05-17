@@ -106,19 +106,19 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="inputAddress">TITULO</label>
-                    <input type="text" name="titulo" class="form-control" id="inputAddress" >
+                    <input type="text" name="titulo" class="form-control" id="inputAddress" required>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="inputAddress">NOTA</label>
-                    <input type="text" name="nota" class="form-control" id="inputAddress">
+                    <input type="text" name="nota" class="form-control" id="inputAddress" required>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="exampleFormControlTextarea1">DESCRIPCION</label>
-                    <textarea name="descripcion" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    <textarea name="descripcion" class="form-control" id="exampleFormControlTextarea1" rows="3" required></textarea>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="inputAddress">FECHA ENTREGA</label>
-                    <input type="text" name="fecha" class="form-control" id="inputAddress">
+                    <input type="text" name="fecha" class="form-control" id="inputAddress" required>
                 </div>
             </div>
             <br>

@@ -108,56 +108,56 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="inputAddress">Nombre</label>
-                    <input type="text" name="nombre_catedratico" class="form-control" id="inputAddress" placeholder="Alex Rodriguez">
+                    <input type="text" name="nombre_catedratico" class="form-control" id="inputAddress" placeholder="Alex Rodriguez" required>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="inputAddress">Apellido</label>
-                    <input type="text" name="apellido_catedratico" class="form-control" id="inputAddress" placeholder="Alex Rodriguez">
+                    <input type="text" name="apellido_catedratico" class="form-control" id="inputAddress" placeholder="Alex Rodriguez"required>
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="inputEmail4">Email</label>
-                    <input type="email" name="email_catedratico" class="form-control" id="inputEmail4" placeholder="Email">
+                    <input type="email" name="email_catedratico" class="form-control" id="inputEmail4" placeholder="Email" required>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="inputPassword4">Password</label>
-                    <input type="password" name="password_catedratico" class="form-control" id="inputPassword4" placeholder="Password">
+                    <input type="password" name="password_catedratico" class="form-control" id="inputPassword4" placeholder="Password" required>
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="inputAddress2">Direccion</label>
-                <input type="text" name="direccion_catedratico" class="form-control" id="inputAddress2" placeholder="Apartmento, o piso">
+                <input type="text" name="direccion_catedratico" class="form-control" id="inputAddress2" placeholder="Apartmento, o piso" required>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="inputCity">Telefono 1</label>
-                    <input type="text" name="telefono1_catedratico" class="form-control" id="inputCity" placeholder="12345678">
+                    <input type="text" name="telefono1_catedratico" class="form-control" id="inputCity" placeholder="12345678" required>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="inputCity">Telefono 2</label>
-                    <input type="text" name="telefono2_catedratico" class="form-control" id="inputCity" placeholder="12345678">
+                    <input type="text" name="telefono2_catedratico" class="form-control" id="inputCity" placeholder="12345678" required>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="inputCity">DPI</label>
-                    <input type="text" name="dpi_catedratico" class="form-control" id="inputCity" placeholder="12345678">
+                    <input type="text" name="dpi_catedratico" class="form-control" id="inputCity" placeholder="12345678" required>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="inputState">Sexo</label>
-                    <select name="sexo_catedratico" id="inputState" class="form-control">
-                        <option selected>Opciones...</option>
+                    <select name="sexo_catedratico" id="inputState" class="form-control" required>
+                        
                         <option value="MASCULINO">Masculino</option>
                         <option value="FEMENINO">Femenino</option>
                     </select>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="inputCity">Fecha de Nacimiento</label>
-                    <input type="text" name="fecha_catedratico" class="form-control" id="inputCity" placeholder="01-05-2019">
+                    <input type="text" name="fecha_catedratico" class="form-control" id="inputCity" placeholder="01-05-2019" required>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="inputCity">Titulo</label>
-                    <input type="text" name="titulo_catedratico" class="form-control" id="inputCity" placeholder="01-05-2019">
+                    <input type="text" name="titulo_catedratico" class="form-control" id="inputCity" placeholder="01-05-2019" required>
                 </div>
 
             </div>

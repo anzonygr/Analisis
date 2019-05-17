@@ -106,7 +106,7 @@
                 <div class="container-fluid ">
                     <br/>
                     <br/>
-                    <h1 align="center">Listado de Usuarios</h1>
+                    <h1 align="center">Listado de Estudiantes</h1>
                     <table class="col table table-striped table-bordered table-responsive">
                         <thead class="thead-dark">
                             <tr>
