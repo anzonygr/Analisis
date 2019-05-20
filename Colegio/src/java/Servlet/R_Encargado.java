@@ -40,7 +40,6 @@ public class R_Encargado extends HttpServlet {
             int cod_login = 0;
             String usuario = request.getParameter("email_encargado");
             String contraseña = request.getParameter("password_encargado");
-            int cod_encargado = 0;
             int cod_rol = 4;
             String nombre = request.getParameter("nombre_encargado");
             String apellido = request.getParameter("apellido_encargado");
@@ -53,14 +52,13 @@ public class R_Encargado extends HttpServlet {
 
             Consultas coo = new Consultas();
             
-            cod_encargado = coo.encargado();
-            cod_login = coo.login();
+            
             
             Consultas co2 = new Consultas();
             Consultas co3 = new Consultas();
-            if (co2.regis_encargado(cod_encargado, cod_rol, nombre, apellido, telefono1, telefono2, usuario, parentesco, direccion, dpi)) {
+            if (co2.regis_encargado(cod_rol, nombre, apellido, telefono1, telefono2, usuario, parentesco, direccion, dpi)) {
                 
-                if (co3.registrar(cod_rol, cod_login, usuario, contraseña)) {
+                if (co3.registrar(cod_rol, usuario, contraseña)) {
                     response.sendRedirect("Administrador.jsp");
                 } else {
                     response.sendRedirect("Registro_Encargado.jsp");

@@ -45,7 +45,6 @@ public class Asignacion_Curso_Catedratico extends HttpServlet {
         int cod_grado = Integer.parseInt(codigo_grado);
         int cod_curso = Integer.parseInt(codigo_curso);
         int cod_seccion = Integer.parseInt(codigo_seccion);
-        int cod_asignacion = 0;
         int cod_estudiante = 0;
         String horario = "15:30";
         int zona = 0;
@@ -54,14 +53,12 @@ public class Asignacion_Curso_Catedratico extends HttpServlet {
         int examen_final = 0;
         String estado = "asignado";
 
-        Consultas co2 = new Consultas();
-        cod_asignacion = co2.asignacion();
 
             Consultas co = new Consultas();
-            if (co.regis_asignacion(cod_asignacion, cod_grado, cod_curso, cod_seccion, cod_catedratico , cod_estudiante, horario, zona, parcial_1, parcial_2, examen_final, estado)){
+            if (co.regis_asignacion(cod_grado, cod_curso, cod_seccion, cod_catedratico , cod_estudiante, horario, zona, parcial_1, parcial_2, examen_final, estado)){
                 response.sendRedirect("Administrador.jsp");
             }else {
-            out.print(cod_asignacion + " " + cod_grado + " " + cod_curso + " " + cod_seccion + " " + cod_catedratico + " " + cod_estudiante + " " + horario + " " + zona + " " + parcial_1 + " " + parcial_2 + " " + examen_final + " " + estado);
+            out.print(cod_grado + " " + cod_curso + " " + cod_seccion + " " + cod_catedratico + " " + cod_estudiante + " " + horario + " " + zona + " " + parcial_1 + " " + parcial_2 + " " + examen_final + " " + estado);
             }
             
         } catch(Exception e){

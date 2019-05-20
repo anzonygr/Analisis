@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -41,7 +42,6 @@ public class R_Estudiante extends HttpServlet {
             int cod_login = 0;
             String usuario = request.getParameter("email_estudiante");
             String contraseña = request.getParameter("password_estudiante");
-            int cod_estudiante = 0;
             int cod_rol = 3;
             String nombre = request.getParameter("nombre_estudiante");
             String apellido = request.getParameter("apellido_estudiante");
@@ -53,7 +53,6 @@ public class R_Estudiante extends HttpServlet {
             String fecha = request.getParameter("fecha_estudiante");
             int cod_seccion = Integer.parseInt(request.getParameter("seccion_estudiante"));
             int cod_encargado = Integer.parseInt(request.getParameter("encargado"));
-            int cod_asignacion = 0;
             int cod_grado = 0;
             int cod_curso = 0;
             String horario = "15:30";
@@ -68,35 +67,41 @@ public class R_Estudiante extends HttpServlet {
             ResultSet rst = null;
             ResultSet rst2 = null;
             ResultSet rst3 = null;
-
+            ResultSet rst4 = null;
+            
             Consultas co = new Consultas();
             Consultas co2 = new Consultas();
             Consultas co3 = new Consultas();
-            Consultas co5 = new Consultas();
             
-            cod_login = co.login();
-            
-            cod_estudiante = co.estudiante();
 
+            int cod_estudiante = 0;
+            
             rst = co.cod_grado_seccion(cod_seccion);
             while (rst.next()) {
                 cod_grado = Integer.parseInt(rst.getString(1));
             }
             rst2 = co.nombre_grado_curso(cod_grado);
 
-            if (co2.regis_estudiante(cod_estudiante, cod_rol, nombre, apellido, telefono1, telefono2, sexo, direccion, cui, fecha, cod_grado, cod_encargado, usuario)) {
-                if (co3.registrar(cod_rol, cod_login, usuario, contraseña)) {
+            if (co2.regis_estudiante(cod_rol, nombre, apellido, telefono1, telefono2, sexo, direccion, cui, fecha, cod_grado, cod_encargado, usuario)) {
+                if (co3.registrar(cod_rol, usuario, contraseña)) {
+                    Consultas co4 = new Consultas();
+                    rst4 = co4.cod_estudiante(nombre, apellido, usuario);
+                    while (rst4.next()) {
+                        cod_estudiante = Integer.parseInt(rst4.getString(1));
+                    }
                     while (rst2.next()) {
-                        cod_asignacion = co.asignacion();
                         cod_curso = Integer.parseInt(rst2.getString(1));
-
+                        Consultas co5 = new Consultas();
                         rst3 = co5.nombre_catedratico_asignacion(cod_grado, cod_curso, cod_seccion);
                         while (rst3.next()) {
                             cod_catedratico = Integer.parseInt(rst3.getString(1));
-                            Consultas co4 = new Consultas();
-                            co4.regis_asignacion(cod_asignacion, cod_grado, cod_curso, cod_seccion, cod_catedratico, cod_estudiante, horario, zona, parcial_1, parcial_2, examen_final, estado);
+                            Consultas co6 = new Consultas();
+                            co6.regis_asignacion(cod_grado, cod_curso, cod_seccion, cod_catedratico, cod_estudiante, horario, zona, parcial_1, parcial_2, examen_final, estado);
+                            
                         }
                     }
+                    //out.print("<h1>"+cod_estudiante+"</h1>");
+                    
 
                     response.sendRedirect("Administrador.jsp");
                 } else {
@@ -107,7 +112,7 @@ public class R_Estudiante extends HttpServlet {
             }
 
         } catch (Exception e) {
-            response.sendRedirect("index.jsp?error=Clave Incorrecto");
+            
         }
     }
 

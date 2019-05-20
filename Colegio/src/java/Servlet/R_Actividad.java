@@ -38,6 +38,7 @@ public class R_Actividad extends HttpServlet {
         try {
             ResultSet rst = null;
             ResultSet rst2 = null;
+            ResultSet rst4 = null;
             String string = request.getParameter("prueba");
             String[] parts = string.split("-");
             String codigo_grado = parts[0];
@@ -60,23 +61,25 @@ public class R_Actividad extends HttpServlet {
             String nombre_asignacion = "";
 
             Consultas co = new Consultas();
-            cod_actividad = co.actividiad();
+
             rst = co.actividiad_cod_asignacion(cod_grado, cod_curso, cod_seccion, cod_catedratico);
             while (rst.next()) {
                 nombre_asignacion = rst.getString(1);
             }
             cod_asignacion = Integer.parseInt(nombre_asignacion);
-            
-            
+
             Consultas co2 = new Consultas();
-            
-            if (co.regis_actividad(cod_actividad, cod_asignacion, cod_grado, cod_curso, cod_seccion, cod_catedratico, titulo, descripcion, nota, fecha)) {
+
+            if (co.regis_actividad(cod_asignacion, cod_grado, cod_curso, cod_seccion, cod_catedratico, titulo, descripcion, nota, fecha)) {
                 rst2 = co2.nombre_estudiante_asignacion(cod_grado, cod_curso, cod_seccion, cod_catedratico);
-                while (rst2.next()){
-                   Consultas co4 = new Consultas();
-                   int cod_entrega_actividad = co4.entrega_actividiad(); 
-                   int cod_estudiante = Integer.parseInt(rst2.getString(1));
-                   co4.regis_entrega_actividad(cod_entrega_actividad, cod_actividad, cod_asignacion, cod_grado, cod_curso, cod_seccion, cod_catedratico, cod_estudiante, descripcion2, nota2, fecha2);
+                while (rst2.next()) {
+                    Consultas co4 = new Consultas();
+                    rst4 = co4.cod_actividad_entrega(cod_grado, cod_curso, cod_seccion, cod_catedratico, titulo);
+                    while (rst4.next()) {
+                        cod_actividad = Integer.parseInt(rst4.getString(1));
+                    }
+                    int cod_estudiante = Integer.parseInt(rst2.getString(1));
+                    co4.regis_entrega_actividad(cod_actividad, cod_asignacion, cod_grado, cod_curso, cod_seccion, cod_catedratico, cod_estudiante, descripcion2, nota2, fecha2);
                 }
                 response.sendRedirect("Catedratico.jsp");
             } else {
@@ -84,7 +87,7 @@ public class R_Actividad extends HttpServlet {
             }
 //            out.print(cod_actividad+"  "+ cod_asignacion+"  "+ cod_grado+"  "+ cod_curso+"  "+ cod_seccion+"  "+ cod_catedratico+"  "+ titulo+"  "+ descripcion+"  "+ nota+"  "+ fecha);
         } catch (Exception e) {
-           response.sendRedirect("index.jsp");
+            response.sendRedirect("index.jsp");
         }
     }
 

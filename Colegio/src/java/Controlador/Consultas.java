@@ -53,15 +53,14 @@ public class Consultas extends Conexion {
         return false;
     }
 
-    public boolean registrar(int cod_rol, int cod_login, String usuario, String password) {
+    public boolean registrar(int cod_rol, String usuario, String password) {
         PreparedStatement pst = null;
         try {
-            String consulta = "INSERT INTO login (COD_ROL, COD_LOGIN, USUARIO, PASSWORD) VALUES(?,?,?,?)";
+            String consulta = "INSERT INTO login (COD_ROL, USUARIO, PASSWORD) VALUES(?,?,?)";
             pst = getConexion().prepareStatement(consulta);
             pst.setInt(1, cod_rol);
-            pst.setInt(2, cod_login);
-            pst.setString(3, usuario);
-            pst.setString(4, password);
+            pst.setString(2, usuario);
+            pst.setString(3, password);
             if (pst.executeUpdate() == 1) {
                 return true;
             }
@@ -85,24 +84,23 @@ public class Consultas extends Conexion {
         return false;
     }
 
-    public boolean regis_estudiante(int cod_estudiante, int cod_rol, String nombre, String apellido, int telefono1, int telefono2, String sexo, String direccion, String cui, String fecha_nacimiento, int cod_grado, int cod_encargado, String correo) {
+    public boolean regis_estudiante(int cod_rol, String nombre, String apellido, int telefono1, int telefono2, String sexo, String direccion, String cui, String fecha_nacimiento, int cod_grado, int cod_encargado, String correo) {
         PreparedStatement pst = null;
         try {
-            String consulta = "INSERT INTO estudiante (COD_ESTUDIANTE, COD_ROL, NOMBRE, APELLIDO, TELEFONO_1, TELEFONO_2, SEXO, DIRECCION, CUI, FECHA_NACIMIENTO, COD_GRADO, COD_ENCARGADO, CORREO) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            String consulta = "INSERT INTO estudiante (COD_ROL, NOMBRE, APELLIDO, TELEFONO_1, TELEFONO_2, SEXO, DIRECCION, CUI, FECHA_NACIMIENTO, COD_GRADO, COD_ENCARGADO, CORREO) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
             pst = getConexion().prepareStatement(consulta);
-            pst.setInt(1, cod_estudiante);
-            pst.setInt(2, cod_rol);
-            pst.setString(3, nombre);
-            pst.setString(4, apellido);
-            pst.setInt(5, telefono1);
-            pst.setInt(6, telefono2);
-            pst.setString(7, sexo);
-            pst.setString(8, direccion);
-            pst.setString(9, cui);
-            pst.setString(10, fecha_nacimiento);
-            pst.setInt(11, cod_grado);
-            pst.setInt(12, cod_encargado);
-            pst.setString(13, correo);
+            pst.setInt(1, cod_rol);
+            pst.setString(2, nombre);
+            pst.setString(3, apellido);
+            pst.setInt(4, telefono1);
+            pst.setInt(5, telefono2);
+            pst.setString(6, sexo);
+            pst.setString(7, direccion);
+            pst.setString(8, cui);
+            pst.setString(9, fecha_nacimiento);
+            pst.setInt(10, cod_grado);
+            pst.setInt(11, cod_encargado);
+            pst.setString(12, correo);
             if (pst.executeUpdate() == 1) {
                 return true;
             }
@@ -126,61 +124,20 @@ public class Consultas extends Conexion {
         return false;
     }
 
-    public boolean regis_encargado(int cod_encargado, int cod_rol, String nombre, String apellido, int telefono1, int telefono2, String correo, String parentesco, String direccion, String dpi) {
+    public boolean regis_encargado(int cod_rol, String nombre, String apellido, int telefono1, int telefono2, String correo, String parentesco, String direccion, String dpi) {
         PreparedStatement pst = null;
         try {
-            String consulta = "INSERT INTO encargado (COD_ENCARGADO, COD_ROL, NOMBRE, APELLIDO, TELEFONO_1, TELEFONO_2, CORREO, PARENTESCO, DIRECCION, DPI) VALUES(?,?,?,?,?,?,?,?,?,?)";
+            String consulta = "INSERT INTO encargado (COD_ROL, NOMBRE, APELLIDO, TELEFONO_1, TELEFONO_2, CORREO, PARENTESCO, DIRECCION, DPI) VALUES(?,?,?,?,?,?,?,?,?)";
             pst = getConexion().prepareStatement(consulta);
-            pst.setInt(1, cod_encargado);
-            pst.setInt(2, cod_rol);
-            pst.setString(3, nombre);
-            pst.setString(4, apellido);
-            pst.setInt(5, telefono1);
-            pst.setInt(6, telefono2);
-            pst.setString(7, correo);
-            pst.setString(8, parentesco);
-            pst.setString(9, direccion);
-            pst.setString(10, dpi);
-            if (pst.executeUpdate() == 1) {
-                return true;
-            }
-        } catch (Exception ex) {
-
-        } finally {
-            try {
-                if (getConexion() != null) {
-                    getConexion().close();
-                }
-                if (pst != null) {
-                    pst.close();
-                }
-            } catch (Exception e) {
-                System.err.println("Error" + e);
-
-            }
-
-        }
-
-        return false;
-    }
-
-    public boolean regis_catedratico(int cod_catedratico, int cod_rol, String nombre, String apellido, int telefono1, int telefono2, String correo, String direccion, String dpi, String sexo, String fecha, String titulo) {
-        PreparedStatement pst = null;
-        try {
-            String consulta = "INSERT INTO catedratico (COD_CATEDRATICO, COD_ROL, NOMBRE, APELLIDO, TELEFONO_1, TELEFONO_2, CORREO, DIRECCION, DPI, SEXO, FECHA_NACIMIENTO, TITULO) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
-            pst = getConexion().prepareStatement(consulta);
-            pst.setInt(1, cod_catedratico);
-            pst.setInt(2, cod_rol);
-            pst.setString(3, nombre);
-            pst.setString(4, apellido);
-            pst.setInt(5, telefono1);
-            pst.setInt(6, telefono2);
-            pst.setString(7, correo);
+            pst.setInt(1, cod_rol);
+            pst.setString(2, nombre);
+            pst.setString(3, apellido);
+            pst.setInt(4, telefono1);
+            pst.setInt(5, telefono2);
+            pst.setString(6, correo);
+            pst.setString(7, parentesco);
             pst.setString(8, direccion);
             pst.setString(9, dpi);
-            pst.setString(10, sexo);
-            pst.setString(11, fecha);
-            pst.setString(12, titulo);
             if (pst.executeUpdate() == 1) {
                 return true;
             }
@@ -204,23 +161,99 @@ public class Consultas extends Conexion {
         return false;
     }
 
-    public boolean regis_asignacion(int cod_asignacion, int cod_grado, int cod_curso, int cod_seccion, int cod_catedratico, int cod_estudiante, String horario, int zona, int parcial_1, int parcial_2, int examen_final, String estado) {
+    public boolean regis_catedratico(int cod_rol, String nombre, String apellido, int telefono1, int telefono2, String correo, String direccion, String dpi, String sexo, String fecha, String titulo) {
         PreparedStatement pst = null;
         try {
-            String consulta = "INSERT INTO asignacion (COD_ASIGNACION, COD_GRADO, COD_CURSO, COD_SECCION, COD_CATEDRATICO, COD_ESTUDIANTE, HORARIO, ZONA, PARCIAL_1, PARCIAL_2, EXAMEN_FINAL, ESTADO) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+            String consulta = "INSERT INTO catedratico (COD_ROL, NOMBRE, APELLIDO, TELEFONO_1, TELEFONO_2, CORREO, DIRECCION, DPI, SEXO, FECHA_NACIMIENTO, TITULO) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+            pst = getConexion().prepareStatement(consulta);
+            pst.setInt(1, cod_rol);
+            pst.setString(2, nombre);
+            pst.setString(3, apellido);
+            pst.setInt(4, telefono1);
+            pst.setInt(5, telefono2);
+            pst.setString(6, correo);
+            pst.setString(7, direccion);
+            pst.setString(8, dpi);
+            pst.setString(9, sexo);
+            pst.setString(10, fecha);
+            pst.setString(11, titulo);
+            if (pst.executeUpdate() == 1) {
+                return true;
+            }
+        } catch (Exception ex) {
+
+        } finally {
+            try {
+                if (getConexion() != null) {
+                    getConexion().close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                System.err.println("Error" + e);
+
+            }
+
+        }
+
+        return false;
+    }
+
+    public boolean regis_asignacion(int cod_grado, int cod_curso, int cod_seccion, int cod_catedratico, int cod_estudiante, String horario, int zona, int parcial_1, int parcial_2, int examen_final, String estado) {
+        PreparedStatement pst = null;
+        try {
+            String consulta = "INSERT INTO asignacion (COD_GRADO, COD_CURSO, COD_SECCION, COD_CATEDRATICO, COD_ESTUDIANTE, HORARIO, ZONA, PARCIAL_1, PARCIAL_2, EXAMEN_FINAL, ESTADO) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+            pst = getConexion().prepareStatement(consulta);
+            pst.setInt(1, cod_grado);
+            pst.setInt(2, cod_curso);
+            pst.setInt(3, cod_seccion);
+            pst.setInt(4, cod_catedratico);
+            pst.setInt(5, cod_estudiante);
+            pst.setString(6, horario);
+            pst.setInt(7, zona);
+            pst.setInt(8, parcial_1);
+            pst.setInt(9, parcial_2);
+            pst.setInt(10, examen_final);
+            pst.setString(11, estado);
+
+            if (pst.executeUpdate() == 1) {
+                return true;
+            }
+        } catch (Exception ex) {
+
+        } finally {
+            try {
+                if (getConexion() != null) {
+                    getConexion().close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                System.err.println("Error" + e);
+
+            }
+
+        }
+
+        return false;
+    }
+
+    public boolean regis_actividad(int cod_asignacion, int cod_grado, int cod_curso, int cod_seccion, int cod_catedratico, String titulo, String descripcion, int nota, String fecha) {
+        PreparedStatement pst = null;
+        try {
+            String consulta = "INSERT INTO actividad (COD_ASIGNACION, COD_GRADO, COD_CURSO, COD_SECCION, COD_CATEDRATICO, TITULO, DESCRIPCION, NOTA, FECHA_ENTREGA) VALUES(?,?,?,?,?,?,?,?,?)";
             pst = getConexion().prepareStatement(consulta);
             pst.setInt(1, cod_asignacion);
             pst.setInt(2, cod_grado);
             pst.setInt(3, cod_curso);
             pst.setInt(4, cod_seccion);
             pst.setInt(5, cod_catedratico);
-            pst.setInt(6, cod_estudiante);
-            pst.setString(7, horario);
-            pst.setInt(8, zona);
-            pst.setInt(9, parcial_1);
-            pst.setInt(10, parcial_2);
-            pst.setInt(11, examen_final);
-            pst.setString(12, estado);
+            pst.setString(6, titulo);
+            pst.setString(7, descripcion);
+            pst.setInt(8, nota);
+            pst.setString(9, fecha);
 
             if (pst.executeUpdate() == 1) {
                 return true;
@@ -245,10 +278,10 @@ public class Consultas extends Conexion {
         return false;
     }
 
-    public boolean regis_actividad(int cod_actividad, int cod_asignacion, int cod_grado, int cod_curso, int cod_seccion, int cod_catedratico, String titulo, String descripcion, int nota, String fecha) {
+    public boolean regis_entrega_actividad(int cod_actividad, int cod_asignacion, int cod_grado, int cod_curso, int cod_seccion, int cod_catedratico, int cod_estudiante, String descripcion, int nota, String fecha) {
         PreparedStatement pst = null;
         try {
-            String consulta = "INSERT INTO actividad (COD_ACTIVIDAD, COD_ASIGNACION, COD_GRADO, COD_CURSO, COD_SECCION, COD_CATEDRATICO, TITULO, DESCRIPCION, NOTA, FECHA_ENTREGA) VALUES(?,?,?,?,?,?,?,?,?,?)";
+            String consulta = "INSERT INTO entrega_actividad (COD_ACTIVIDAD, COD_ASIGNACION, COD_GRADO, COD_CURSO, COD_SECCION, COD_CATEDRATICO, COD_ESTUDIANTE, DESCRIPCION, NOTA, ESTADO) VALUES(?,?,?,?,?,?,?,?,?,?)";
             pst = getConexion().prepareStatement(consulta);
             pst.setInt(1, cod_actividad);
             pst.setInt(2, cod_asignacion);
@@ -256,50 +289,10 @@ public class Consultas extends Conexion {
             pst.setInt(4, cod_curso);
             pst.setInt(5, cod_seccion);
             pst.setInt(6, cod_catedratico);
-            pst.setString(7, titulo);
+            pst.setInt(7, cod_estudiante);
             pst.setString(8, descripcion);
             pst.setInt(9, nota);
             pst.setString(10, fecha);
-
-            if (pst.executeUpdate() == 1) {
-                return true;
-            }
-        } catch (Exception ex) {
-
-        } finally {
-            try {
-                if (getConexion() != null) {
-                    getConexion().close();
-                }
-                if (pst != null) {
-                    pst.close();
-                }
-            } catch (Exception e) {
-                System.err.println("Error" + e);
-
-            }
-
-        }
-
-        return false;
-    }
-
-    public boolean regis_entrega_actividad(int cod_entrega_actividad, int cod_actividad, int cod_asignacion, int cod_grado, int cod_curso, int cod_seccion, int cod_catedratico, int cod_estudiante, String descripcion, int nota, String fecha) {
-        PreparedStatement pst = null;
-        try {
-            String consulta = "INSERT INTO entrega_actividad (COD_ENTREGA_ACTIVIDAD, COD_ACTIVIDAD, COD_ASIGNACION, COD_GRADO, COD_CURSO, COD_SECCION, COD_CATEDRATICO, COD_ESTUDIANTE, DESCRIPCION, NOTA, ESTADO) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
-            pst = getConexion().prepareStatement(consulta);
-            pst.setInt(1, cod_entrega_actividad);
-            pst.setInt(2, cod_actividad);
-            pst.setInt(3, cod_asignacion);
-            pst.setInt(4, cod_grado);
-            pst.setInt(5, cod_curso);
-            pst.setInt(6, cod_seccion);
-            pst.setInt(7, cod_catedratico);
-            pst.setInt(8, cod_estudiante);
-            pst.setString(9, descripcion);
-            pst.setInt(10, nota);
-            pst.setString(11, fecha);
 
             if (pst.executeUpdate() == 1) {
                 return true;
@@ -329,132 +322,7 @@ public class Consultas extends Conexion {
         return contraseña;
     }
 
-    public int login() {
-        try {
-            PreparedStatement pst = null;
-            ResultSet rs = null;
-            int cont = 1;
-            String consulta = "Select * from LOGIN";
-            pst = getConexion().prepareStatement(consulta);
-            rs = pst.executeQuery();
-            while (rs.next()) {
-                cont++;
-            }
-            return cont;
-        } catch (Exception e) {
-        }
-        return 0;
-
-    }
-
-    public int estudiante() {
-        try {
-            PreparedStatement pst = null;
-            ResultSet rs = null;
-            int cont = 1;
-            String consulta = "Select * from estudiante";
-            pst = getConexion().prepareStatement(consulta);
-            rs = pst.executeQuery();
-            while (rs.next()) {
-                cont++;
-            }
-            return cont;
-        } catch (Exception e) {
-        }
-        return 0;
-
-    }
-
-    public int encargado() {
-        try {
-            PreparedStatement pst = null;
-            ResultSet rs = null;
-            int cont = 1;
-            String consulta = "Select * from encargado";
-            pst = getConexion().prepareStatement(consulta);
-            rs = pst.executeQuery();
-            while (rs.next()) {
-                cont++;
-            }
-            return cont;
-        } catch (Exception e) {
-        }
-        return 0;
-
-    }
-
-    public int catedratico() {
-        try {
-            PreparedStatement pst = null;
-            ResultSet rs = null;
-            int cont = 1;
-            String consulta = "Select * from catedratico";
-            pst = getConexion().prepareStatement(consulta);
-            rs = pst.executeQuery();
-            while (rs.next()) {
-                cont++;
-            }
-            return cont;
-        } catch (Exception e) {
-        }
-        return 0;
-
-    }
-
-    public int asignacion() {
-        try {
-            PreparedStatement pst = null;
-            ResultSet rs = null;
-            int cont = 1;
-            String consulta = "Select * from asignacion";
-            pst = getConexion().prepareStatement(consulta);
-            rs = pst.executeQuery();
-            while (rs.next()) {
-                cont++;
-            }
-            return cont;
-        } catch (Exception e) {
-        }
-        return 0;
-
-    }
-
-    public int actividiad() {
-        try {
-            PreparedStatement pst = null;
-            ResultSet rs = null;
-            int cont = 1;
-            String consulta = "Select * from actividad";
-            pst = getConexion().prepareStatement(consulta);
-            rs = pst.executeQuery();
-            while (rs.next()) {
-                cont++;
-            }
-            return cont;
-        } catch (Exception e) {
-        }
-        return 0;
-
-    }
-
-    public int entrega_actividiad() {
-        try {
-            PreparedStatement pst = null;
-            ResultSet rs = null;
-            int cont = 1;
-            String consulta = "Select * from entrega_actividad";
-            pst = getConexion().prepareStatement(consulta);
-            rs = pst.executeQuery();
-            while (rs.next()) {
-                cont++;
-            }
-            return cont;
-        } catch (Exception e) {
-        }
-        return 0;
-
-    }
-
+    
     public ResultSet cod_usuario_login_catedratico(String usuario) {
         try {
             PreparedStatement pst = null;
@@ -703,6 +571,44 @@ public class Consultas extends Conexion {
 
     }
 
+    public ResultSet cod_actividad_entrega(int cod_grado, int cod_curso, int cod_seccion, int cod_catedratico, String titulo) {
+        try {
+            PreparedStatement pst = null;
+            ResultSet rs = null;
+            String consulta = "select a.COD_ACTIVIDAD FROM actividad a  WHERE COD_GRADO = ? AND COD_CURSO = ? AND COD_SECCION = ? AND COD_CATEDRATICO =? AND TITULO = ?";
+            pst = getConexion().prepareStatement(consulta);
+            pst.setInt(1, cod_grado);
+            pst.setInt(2, cod_curso);
+            pst.setInt(3, cod_seccion);
+            pst.setInt(4, cod_catedratico);
+            pst.setString(5, titulo);
+            rs = pst.executeQuery();
+
+            return rs;
+        } catch (Exception e) {
+        }
+        return null;
+
+    }
+
+    public ResultSet cod_estudiante (String nombre, String apellido, String correo) {
+        try {
+            PreparedStatement pst = null;
+            ResultSet rs = null;
+            String consulta = "select COD_ESTUDIANTE FROM estudiante WHERE NOMBRE = ? AND APELLIDO =? AND CORREO =?";
+            pst = getConexion().prepareStatement(consulta);
+            pst.setString(1, nombre);
+            pst.setString(2, apellido);
+            pst.setString(3, correo);
+            rs = pst.executeQuery();
+
+            return rs;
+        } catch (Exception e) {
+        }
+        return null;
+
+    }
+
     public ResultSet nombre_grado_curso(int cod_grado) {
         try {
             PreparedStatement pst = null;
@@ -819,7 +725,7 @@ public class Consultas extends Conexion {
         try {
             PreparedStatement pst = null;
             ResultSet rs = null;
-            String consulta = "select COD_Catedratico from asignacion WHERE COD_GRADO = ? AND COD_CURSO = ? AND COD_SECCION = ? AND COD_ESTUDIANTE = 0";
+            String consulta = "select COD_CATEDRATICO from asignacion WHERE COD_GRADO = ? AND COD_CURSO = ? AND COD_SECCION = ? AND COD_ESTUDIANTE = 0";
             pst = getConexion().prepareStatement(consulta);
             pst.setInt(1, cod_grado);
             pst.setInt(2, cod_curso);
@@ -872,7 +778,7 @@ public class Consultas extends Conexion {
 
 //   public static void main(String[] args){
 //        Consultas co = new Consultas();
-//        System.out.println(co.regis_entrega_actividad(3,2, 2, 4, 1, 2, 1, 5, "descripcion", 10, "fecha"));
+//        System.out.println(co.regis_asignacion(1, 1, 2, 4, 0, "15:30", 0, 0, 0, 0, "asignado"));
 //      }
 //    public static void main(String[] args) {
 //        Consultas co = new Consultas();
@@ -915,9 +821,9 @@ public class Consultas extends Conexion {
     public static void main(String[] args) {
         Consultas co = new Consultas();
         try {
-            ResultSet rst = co.nombre_list_asignacion_estudiante(4, 1, 1, 1, 2);
+            ResultSet rst = co.nombre_catedratico_asignacion(1, 5, 1);
             while (rst.next()) {
-                String nombre_encargado = rst.getString(1) + " " + rst.getString(2) + " " + rst.getString(3) + " " + rst.getString(4)+ " " + rst.getString(5);
+                String nombre_encargado = rst.getString(1);
                     System.out.println(nombre_encargado);
             }
         }catch (SQLException ex) {

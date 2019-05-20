@@ -37,10 +37,10 @@ public class R_Catedratico extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            int cod_login = 0;
+            
             String usuario = request.getParameter("email_catedratico");
             String contraseña = request.getParameter("password_catedratico");
-            int cod_catedratico = 0;
+            
             int cod_rol = 2;
             String nombre = request.getParameter("nombre_catedratico");
             String apellido = request.getParameter("apellido_catedratico");
@@ -52,15 +52,11 @@ public class R_Catedratico extends HttpServlet {
             String fecha = request.getParameter("fecha_catedratico");
             String titulo = request.getParameter("titulo_catedratico");
             
-            Consultas coo = new Consultas();
-            cod_catedratico = coo.catedratico();
-            cod_login = coo.login();
-            
             Consultas co2 = new Consultas();
             Consultas co3 = new Consultas();
-            if (co2.regis_catedratico(cod_catedratico, cod_rol, nombre, apellido, telefono1, telefono2, usuario, direccion, dpi, sexo, fecha, titulo)) {
+            if (co2.regis_catedratico(cod_rol, nombre, apellido, telefono1, telefono2, usuario, direccion, dpi, sexo, fecha, titulo)) {
                 
-                if (co3.registrar(cod_rol, cod_login, usuario, contraseña)) {
+                if (co3.registrar(cod_rol, usuario, contraseña)) {
                     response.sendRedirect("Administrador.jsp");
                 } else {
                     response.sendRedirect("Registro_Catedratico.jsp");
